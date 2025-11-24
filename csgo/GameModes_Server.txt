@@ -1,0 +1,35 @@
+// To use this file, rename it to GameModes_Server.txt
+//
+// Values here override the default gamemodes.txt 
+
+"GameModes_Server.txt"
+{
+  "gameTypes"
+  {
+    "mapgroups"
+    {
+      "mg_battleroyale"
+      {
+        "name"			"mg_battleroyale"
+        "maps"
+        {
+          "workshop/499172310/br_electrified"	""
+          "workshop/500852664/br_flood_v1"		""
+          "workshop/937614537/br_slopes"		  ""
+          "workshop/850490634/br_killzones"		""
+          "workshop/926327189/br_drop_v1-3"		""
+        }
+      }
+      "mg_awp"
+      {
+        "name"  "mg_awp"
+        "maps"
+        {
+          "workshop/429056610/awp_tower_dev"  ""
+          "workshop/171033381/awp_minecraft"  ""
+          "workshop/144274038/awp_infinte_v2" ""
+        }
+      }
+    }
+  }
+}
