@@ -193,16 +193,36 @@
     "Gun Game"
     {
         "command" "sm_nextgamemode gungame"
-        "map ar_baggage"
-        "map ar_lunacy"
-        "map ar_dizzy"
-        "map ar_monastery"
-        "map ar_shoots"
+
+		    "ar_shoots" {}
+		    "ar_monastery" {}
+		    "ar_dizzy" {}
+		    "ar_lunacy" {}
+		    "ar_baggage" {}
+		    "de_dust2" {}
+		    "de_train" {}
+		    "de_inferno" {}
+		    "workshop/122521875/fy_pool_day" {}
     }
     
     "Deathmatch"
     {
         "command" "sm_nextgamemode deathmatch"
+        "de_dust2"			 {}
+        "de_inferno"		 {}
+        "de_mirage"			 {}
+        "de_cbble"			 {}
+        "de_overpass"		 {}
+        "de_nuke"			 {}
+        "de_vertigo"		 {}
+        "cs_militia"		 {}
+        "cs_assault"		 {}
+        "cs_office"			 {}
+        "cs_italy"			 {}
+        "de_lake"			 {}
+        "de_stmarc"			 {}
+        "de_ancient"		 {}
+		    "workshop/122521875/fy_pool_day" {}
     }
     
     "AWP"
@@ -256,19 +276,21 @@
     "One in the Chamber"
     {
         "command" "sm_nextgamemode oneinthechamber"
-        "workshop/429056610/awp_tower_dev"
-        {
 
-        }
-
-        "workshop/171033381/awp_minecraft"
-        {
-
-        }
-
-        "workshop/144274038/awp_infinte_v2"
-        {
-
-        }
+        "de_dust2"			 {}
+        "de_inferno"		 {}
+        "de_mirage"			 {}
+        "de_cbble"			 {}
+        "de_overpass"		 {}
+        "de_nuke"			 {}
+        "de_vertigo"		 {}
+        "cs_militia"		 {}
+        "cs_assault"		 {}
+        "cs_office"			 {}
+        "cs_italy"			 {}
+        "de_lake"			 {}
+        "de_stmarc"			 {}
+        "de_ancient"		 {}
+		    "workshop/122521875/fy_pool_day" {}
     }
 }
