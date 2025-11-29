@@ -354,6 +354,18 @@
 		    {
 
 		    }
+		    "workshop/882355656/de_dust2_css1"
+		    {
+            "display" "de_dust2_css1"
+		    }
+		    "workshop/258081127/fy_iceworld"
+		    {
+            "display" "fy_iceworld"
+		    }
+		    "workshop/1172581352/de_nuke_css1"
+		    {
+            "display" "de_nuke_css1"
+		    }
     }
 
     "AWP"
@@ -372,6 +384,22 @@
         "workshop/171033381/awp_minecraft"
 		    {
             "display" "awp_minecraft"
+		    }
+        "workshop/1687663948/aim_redline"
+		    {
+            "display" "aim_redline"
+		    }
+        "workshop/487039571/awp_lego_2"
+		    {
+            "display" "awp_lego_2"
+		    }
+        "workshop/3009585178/awppencil"
+		    {
+            "display" "awp_pencil"
+		    }
+        "workshop/3009585178/awppencil"
+		    {
+            "display" "awp_pencil"
 		    }
     }
 
