@@ -11,9 +11,7 @@
 #pragma newdecls required
 
 EngineVersion g_Game;
-ConVar g_cVersion;
 ConVar g_cLives;
-ConVar g_cRandomSpawns;
 
 int g_iPlayerLives[MAXPLAYERS + 1];
 
@@ -36,14 +34,13 @@ public void OnPluginStart()
 	if (g_Game != Engine_CSGO)
 		SetFailState("This plugin is for CSGO only.");
 
-	g_cVersion = CreateConVar("otc_version", PLUGIN_VERSION, "One in the Chambers Version do not change", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	CreateConVar("otc_version", PLUGIN_VERSION, "One in the Chambers Version do not change", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	g_cLives = CreateConVar("otc_lives", "3", "How many lives does everyone have", FCVAR_NONE, true, 1.0);
-	g_cRandomSpawns = CreateConVar("otc_random_spawns", "1", "Use random spawns", FCVAR_NONE);
 
 	AutoExecConfig(true, "OneInTheChamber");
 
-	m_iClip1 = FindSendPropOffs("CBaseCombatWeapon", "m_iClip1");
-	m_iPrimaryReserveAmmo = FindSendPropOffs("CBaseCombatWeapon", "m_iPrimaryReserveAmmoCount");
+	m_iClip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
+	m_iPrimaryReserveAmmo = FindSendPropInfo("CBaseCombatWeapon", "m_iPrimaryReserveAmmoCount");
 
 	if(m_iClip1 == -1)
 		SetFailState("[OTC] Could not find \"m_iClip1\" stopping plugin");
@@ -51,46 +48,11 @@ public void OnPluginStart()
 	if(m_iPrimaryReserveAmmo == -1)
 		SetFailState("[OTC] Could not find \"m_iPrimaryReserveAmmoCount\" stopping plugin");
 
-	if (g_cLives != null)
-		g_cLives.AddChangeHook(OTCCvarChanged);
-
-	if (g_cRandomSpawns != null)
-		g_cRandomSpawns.AddChangeHook(OTCCvarChanged);
-
 	HookEvent("player_spawn", Event_PlayerSpawnPost, EventHookMode_Post);
 	HookEvent("player_spawn", Event_PlayerSpawnPre, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
 	HookEvent("round_start", Event_RoundStart);
 	HookEvent("round_end", Event_RoundEnd);
-}
-
-public void OnMapStart()
-{
-	ConVar teammatesEnmies = FindConVar("mp_teammates_are_enemies");
-	teammatesEnmies.SetInt(1);
-}
-
-public void OnConfigsExecuted()
-{
-	ConVar spawns = FindConVar("mp_randomspawn");
-	if(g_cRandomSpawns.IntValue >= 1)
-	{
-		spawns.SetInt(1);
-		spawns = FindConVar("mp_randomspawn_los");
-		spawns.SetInt(1);
-	}
-	else
-	{
-		spawns.SetInt(0);
-		spawns = FindConVar("mp_randomspawn_los");
-		spawns.SetInt(0);
-	}
-}
-
-public void OTCCvarChanged(ConVar convar, const char[] oldVal, const char[] newVal)
-{
-	if (g_cLives.IntValue < 1)
-		g_cLives.SetInt(1);
 }
 
 public void Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
@@ -185,6 +147,8 @@ public Action Timer_SetPlayerAmmo(Handle Timer, int weapon)
 		SetEntData(weapon, m_iClip1, 1);
 		SetEntData(weapon, m_iPrimaryReserveAmmo, 0);
 	}
+
+	return Plugin_Continue;
 }
 
 public void OnClientPostAdminCheck(int client)
@@ -209,6 +173,7 @@ public Action Hook_WeaponEquip(int client, int weapon)
 		AcceptEntityInput(weapon, "kill");
 		return Plugin_Handled;
 	}
+
 	return Plugin_Continue;
 }
 
@@ -227,6 +192,7 @@ public Action Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float
 		damage = 500.0;
 		return Plugin_Changed;
 	}
+
 	return Plugin_Continue;
 }
 
@@ -282,9 +248,6 @@ public void Event_PlayerDeathPre(Event event, const char[] name, bool dontBroadc
 		else if(team == CS_TEAM_T)
 			CS_TerminateRound(5.0, CSRoundEnd_TerroristWin);
 	}
-
-	if (StrEqual(sWeapon, "weapon_knife", false))
-		GiveKillAmmo(attacker);
 }
 
 stock void GiveKillAmmo(int client)
@@ -296,11 +259,8 @@ stock void GiveKillAmmo(int client)
 	char classname[32];
 	GetEntityClassname(weapon, classname, 32);
 
-  RemovePlayerItem(client, weapon);
-  AcceptEntityInput(weapon, "kill");
-  //weapon = GiveWeapon(client, "weapon_deagle");
-  weapon = GivePlayerItem(client, "weapon_deagle");
   SetEntData(weapon, m_iClip1, 1);
+  SetEntData(weapon, m_iPrimaryReserveAmmo, 0);
 }
 
 stock void StripClientWeapons(int client)
@@ -315,25 +275,3 @@ stock void StripClientWeapons(int client)
 		}
 	}
 }
-
-/*stock int GiveWeapon(int client, const char[] weaponName)
-{
-	if (IsClientInGame(client) && (client > 0 && client <= MaxClients))
-	{
-		int weapon;
-		float pos[3];
-		GetEntPropVector(client, Prop_Send, "m_vecOrigin", pos);
-
-		weapon = CreateEntityByName(weaponName);
-		if (weapon != -1)
-		{
-			SetEntDataEnt2(weapon, FindSendPropOffs("CBaseCombatWeapon", "m_hOwnerEntity"), client);
-			DispatchSpawn(weapon);
-			TeleportEntity(weapon, pos, NULL_VECTOR, NULL_VECTOR);
-			EquipPlayerWeapon(client, weapon);
-			SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
-			return weapon;
-		}
-	}
-	return -1;
-}*/
