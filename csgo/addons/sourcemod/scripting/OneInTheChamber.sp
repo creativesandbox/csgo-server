@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
-#define PLUGIN_AUTHOR "R3TROATTACK (http://steamcommunity.com/id/R3TROATTACK/)"
-#define PLUGIN_VERSION "1.00"
+#define PLUGIN_AUTHOR "jkroepke"
+#define PLUGIN_VERSION "2.00"
 
 #include <sourcemod>
 #include <sdktools>
@@ -25,7 +25,7 @@ public Plugin myinfo =
 	author = PLUGIN_AUTHOR,
 	description = "One in the chamber gamemode",
 	version = PLUGIN_VERSION,
-	url = "https://github.com/R3TROATTACK"
+	url = "https://github.com/jkroepke"
 };
 
 public void OnPluginStart()
