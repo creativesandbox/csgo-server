@@ -256,14 +256,7 @@ stock void GiveKillAmmo(int client)
 	if (weapon == -1)
 		return;
 
-	char classname[32];
-	GetEntityClassname(weapon, classname, 32);
-
-  SetEntData(weapon, m_iClip1, 1);
-  SetEntProp(weapon, Prop_Send, "m_iClip1", 1);
-
-  SetEntData(weapon, m_iPrimaryReserveAmmo, 0);
-  SetEntProp(weapon, Prop_Send, "m_iPrimaryReserveAmmoCount", 0);
+	CreateTimer(0.1, Timer_SetPlayerAmmo, weapon, TIMER_FLAG_NO_MAPCHANGE);
 }
 
 stock void StripClientWeapons(int client)
