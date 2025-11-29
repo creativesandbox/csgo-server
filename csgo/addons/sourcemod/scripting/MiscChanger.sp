@@ -991,4 +991,6 @@ Action Timer_PrintHintEconRepeat(Handle timer, DataPack dp)
 	int client = dp.ReadCell();
 	
 	PrintHintItemEconImage(client, itemDef, false);
+
+	return Plugin_Handled;
 }
