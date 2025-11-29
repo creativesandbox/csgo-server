@@ -381,7 +381,6 @@
 		    "workshop/882355656/de_dust2_css1"
         {
             "display"      "GunGame: de_dust2_css1"
-        }
 		    "workshop/258081127/fy_iceworld"
         {
             "display"      "GunGame: fy_iceworld"
@@ -399,8 +398,8 @@
     "OneChamber"
     {
         "display-template"      "One Chamber: {MAP}"
-        "pre-command"           "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2; sv_game_mode_flags 0"
-        "command"               "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2; sv_game_mode_flags 0; exec gamemode_one_in_the_chamber.cfg"
+        "pre-command"           "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2;sv_game_mode_flags 0"
+        "command"               "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2;sv_game_mode_flags 0; exec gamemode_one_in_the_chamber.cfg"
 
         "ar_baggage" {}
         "ar_dizzy" {}
@@ -512,7 +511,7 @@
         "workshop/350728807/sniper_t6" { }
     }
 
-    "BattleRoyale"
+    "Battle Royale"
     {
         "display-template"      "BR: {MAP}"
         "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 3;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0"
@@ -547,8 +546,8 @@
     "flyingscoutsman"
     {
         "display-template"      "FlyScout: {MAP}"
-        "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 3;sv_game_mode_flags 0"
-        "command"               "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 3;sv_game_mode_flags 0"
+        "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 3;sv_game_mode_flags 0; bot_quota 0"
+        "command"               "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 3;sv_game_mode_flags 0; bot_quota 0"
 
 		    "de_lake" {}
 		    "de_safehouse" {}
