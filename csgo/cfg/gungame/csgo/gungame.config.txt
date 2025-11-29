@@ -50,7 +50,7 @@
          *      1 - Freeze players.
          *      0 - Do not freeze players.
          */
-        "WinnerFreezePlayers" "0"
+        "WinnerFreezePlayers" "1"
 
         /**
          * Winner effects.
@@ -128,7 +128,7 @@
         "ShowLeaderInHintBox" "0"
 
         /* Show leader's weapon name in chat with leading message */
-        "ShowLeaderWeapon" "0"
+        "ShowLeaderWeapon" "1"
         
         /**
          * Strip dead players weapon
@@ -159,7 +159,7 @@
         "MultiKillChat" "0"
         
         /* Set sv_alltalk 1 after player win */
-        "AlltalkOnWin" "1"
+        "AlltalkOnWin" "0"
         
         /* Start voting if leader level is less maximum level by this value */
         "VoteLevelLessWeaponCount" "2"
@@ -195,7 +195,7 @@
          * How many kills they need to with the weapon to get the next level
          * Kills will count across all rounds so that you don't have to get them in one round.
          */
-        "MinKillsPerLevel" "1"
+        "MinKillsPerLevel" "2"
 
         /**
          * Enabled friendly fire automatically when a player reaches hegrenade level.
@@ -218,7 +218,7 @@
          * 0 - Disabled
          * 1 - Enabled
          */
-        "FFA" "0"
+        "FFA" "1"
 
         /** 
          * Enable friendly fire on defined level.
@@ -243,7 +243,7 @@
         /** 
          * Disable rtv on defined level. 0 - disabled.
          */
-        "DisableRtvLevel" "0"
+        "DisableRtvLevel" "1"
 
         /**
          * If this option is enabled, than player can level up by killing with prop_physics.
@@ -307,7 +307,7 @@
         /* ----- [1.2. knifepro] ----- */
         
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */
-        "KnifePro" "1"
+        "KnifePro" "0"
 
         /* Enables Knife Pro when a player is on hegrenade level */
         "KnifeProHE"    "0"
@@ -679,9 +679,9 @@
         "LevelDown"         "gungame/smb3_powerdown.mp3"
         "Triple"            "gungame/smb_star.mp3"
         "Autoff"            "gungame/smb_warning2.mp3"
-        "MultiKill"         "gungame/multikill.mp3"   // (Ñ) VALVE
+        "MultiKill"         "gungame/multikill.mp3"   // (ï¿½) VALVE
         /* Put each song filename in this list seperated by commas */
-        "Winner"            "gungame/winner.mp3"      // (Ñ) VALVE
-        "WarmupTimerSound"  "gungame/timer.mp3"       // (Ñ) VALVE
+        "Winner"            "gungame/winner.mp3"      // (ï¿½) VALVE
+        "WarmupTimerSound"  "gungame/timer.mp3"       // (ï¿½) VALVE
     }
 }
