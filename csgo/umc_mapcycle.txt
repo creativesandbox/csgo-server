@@ -192,7 +192,7 @@
 {
     "GunGame"
     {
-        "display-template"      "GunGame: {MAP}"
+        "display-template"      "GunGame {MAP}"
         "postvote-command       "sm_nextgamemode gungame"
 
 		    "ar_shoots"
@@ -271,7 +271,7 @@
 
     "Deathmatch"
     {
-        "display-template"      "DM: {MAP}"
+        "display-template"      "DM {MAP}"
         "postvote-command"      "sm_nextgamemode deathmatch"
         "de_dust2"
 		    {
@@ -337,7 +337,7 @@
 
     "AWP"
     {
-        "display-template"      "AMP: {MAP}"
+        "display-template"      "AMP {MAP}"
         "postvote-command"      "sm_nextgamemode awp"
 
         "workshop/144274038/awp_infinte_v2"
@@ -352,7 +352,7 @@
 
     "BattleRoyale"
     {
-        "display-template"      "Battle Royale: {MAP}"
+        "display-template"      "Battle Royale {MAP}"
         "postvote-command"      "sm_nextgamemode br"
 
         "workshop/499172310/br_electrified"
@@ -387,7 +387,7 @@
 
     "Retake"
     {
-        "display-template"      "Retake: {MAP}"
+        "display-template"      "Retake {MAP}"
         "postvote-command"      "sm_nextgamemode retake"
 
 		    "de_ancient"
@@ -426,7 +426,7 @@
 
     "OneChamber"
     {
-        "display-template"      "One Chamber: {MAP}"
+        "display-template"      "One Chamber {MAP}"
         "postvote-command"      "sm_nextgamemode oneinthechamber"
 
         "de_dust2"
@@ -487,7 +487,7 @@
 		    }
 		    "workshop/122521875/fy_pool_day"
 		    {
-
+            "display" "One Chamber: fy_pool_day"
 		    }
     }
 }
