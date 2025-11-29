@@ -298,16 +298,58 @@
         "pre-command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2; sv_game_mode_flags 0"
         "command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2; sv_game_mode_flags 0; exec gamemode_gungame.cfg; gg_enable;"
 
-				"de_lake"		    {}
-				"de_stmarc"			{}
-				"de_safehouse"	{}
-				"ar_shoots"			{}
-				"ar_baggage"		{}
-				"ar_lunacy"			{}
-				"ar_monastery"	{}
-				"de_dust2"	    {}
-				"de_inferno"	  {}
+        "ar_baggage" {}
+        "ar_dizzy" {}
+        "ar_lunacy" {}
+        "ar_monastery" {}
+        "ar_shoots" {}
+        "cs_agency" {}
+        "cs_assault" {}
+        "cs_italy" {}
+        "cs_militia" {}
+        "cs_office" {}
+        "de_ancient" {}
+        "de_anubis" {}
+        "de_bank" {}
+        "de_boyard" {}
+        "de_cache" {}
+        "de_canals" {}
+        "de_cbble" {}
+        "de_chalice" {}
+        "de_dust2" {}
+        "de_inferno" {}
+        "de_lake" {}
+        "de_mirage" {}
+        "de_nuke" {}
+        "de_overpass" {}
+        "de_safehouse" {}
+        "de_shortdust" {}
+        "de_shortnuke" {}
+        "de_stmarc" {}
+        "de_sugarcane" {}
+        "de_train" {}
+        "de_tuscan" {}
+        "de_vertigo" {}
 
+		    
+
+		    "workshop/319808082/ar_deagle5_nuke"
+        {
+            "display"      "GunGame: ar_deagle5_nuke"
+        }
+        
+		    "workshop/221603249/de_marquis"
+        {
+            "display"      "GunGame: de_marquis"
+        }
+		    "workshop/150267492/de_chinatown"
+        {
+            "display"      "GunGame: de_chinatown"
+        }
+		    "workshop/174668691/cs_agency"
+        {
+            "display"      "GunGame: cs_agency"
+        }
 		    "workshop/127494596/The_Arena"
         {
             "display"      "GunGame: The_Arena"
@@ -324,6 +366,18 @@
         {
             "display"      "GunGame: fy_pool_day_classic"
         }
+		    "workshop/182604249/de_overgrown"
+        {
+            "display"      "GunGame: de_overgrown"
+        }
+		    "workshop/526448928/de_killhouse"
+        {
+            "display"      "GunGame: de_killhouse"
+        }
+		    "workshop/835631624/fy_snow_rework_kp"
+        {
+            "display"      "GunGame: fy_snow_rework_kp"
+        }
 		    "workshop/882355656/de_dust2_css1"
         {
             "display"      "GunGame: de_dust2_css1"
@@ -336,24 +390,67 @@
         {
             "display"      "GunGame: de_nuke_css1"
         }
+		    "workshop/219295593/cs_rush"
+        {
+            "display"      "GunGame: cs_rush"
+        }
     }
 
     "OneChamber"
     {
-        "display-template"      "One Chamber:  {MAP}"
+        "display-template"      "One Chamber: {MAP}"
         "pre-command"           "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2;sv_game_mode_flags 0"
         "command"               "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2;sv_game_mode_flags 0; exec gamemode_one_in_the_chamber.cfg"
 
-				"de_lake"		    {}
-				"de_stmarc"			{}
-				"de_safehouse"	{}
-				"ar_shoots"			{}
-				"ar_baggage"		{}
-				"ar_lunacy"			{}
-				"ar_monastery"	{}
-				"de_dust2"	    {}
-				"de_inferno"	  {}
+        "ar_baggage" {}
+        "ar_dizzy" {}
+        "ar_lunacy" {}
+        "ar_monastery" {}
+        "ar_shoots" {}
+        "cs_agency" {}
+        "cs_assault" {}
+        "cs_italy" {}
+        "cs_militia" {}
+        "cs_office" {}
+        "de_ancient" {}
+        "de_anubis" {}
+        "de_bank" {}
+        "de_boyard" {}
+        "de_cache" {}
+        "de_canals" {}
+        "de_cbble" {}
+        "de_chalice" {}
+        "de_dust2" {}
+        "de_inferno" {}
+        "de_lake" {}
+        "de_mirage" {}
+        "de_nuke" {}
+        "de_overpass" {}
+        "de_safehouse" {}
+        "de_shortdust" {}
+        "de_shortnuke" {}
+        "de_stmarc" {}
+        "de_sugarcane" {}
+        "de_train" {}
+        "de_tuscan" {}
+        "de_vertigo" {}
 
+		    "workshop/319808082/ar_deagle5_nuke"
+        {
+            "display"      "One Chamber: ar_deagle5_nuke"
+        }
+		    "workshop/221603249/de_marquis"
+        {
+            "display"      "One Chamber: de_marquis"
+        }
+		    "workshop/150267492/de_chinatown"
+        {
+            "display"      "One Chamber: de_chinatown"
+        }
+		    "workshop/174668691/cs_agency"
+        {
+            "display"      "One Chamber: cs_agency"
+        }
 		    "workshop/127494596/The_Arena"
         {
             "display"      "One Chamber: The_Arena"
@@ -370,6 +467,14 @@
         {
             "display"      "One Chamber: fy_pool_day_classic"
         }
+		    "workshop/182604249/de_overgrown"
+        {
+            "display"      "One Chamber: de_overgrown"
+        }
+		    "workshop/526448928/de_killhouse"
+        {
+            "display"      "One Chamber: de_killhouse"
+        }
 		    "workshop/835631624/fy_snow_rework_kp"
         {
             "display"      "One Chamber: fy_snow_rework_kp"
@@ -385,6 +490,10 @@
 		    "workshop/1172581352/de_nuke_css1"
         {
             "display"      "One Chamber: de_nuke_css1"
+        }
+		    "workshop/219295593/cs_rush"
+        {
+            "display"      "One Chamber: cs_rush"
         }
     }
 
@@ -451,47 +560,99 @@
 
     "ArmsRace"
     {
-        "display-template"  "Arms Race: {MAP}"
-        "pre-command"       "sm plugins unload disabled/OneInTheChamber; game_type 1; game_mode 0;sv_skirmish_id 10; sv_game_mode_flags 0"
-        "command"           "sm plugins unload disabled/OneInTheChamber; game_type 1; game_mode 0;sv_skirmish_id 10; sv_game_mode_flags 0"
+        "display-template"      "ArmsRace: {MAP}"
+        "pre-command" "sm plugins unload disabled/OneInTheChamber; game_type 1; game_mode 0;sv_skirmish_id 10; sv_game_mode_flags 0"
+        "command" "sm plugins unload disabled/OneInTheChamber; game_type 1; game_mode 0;sv_skirmish_id 10; sv_game_mode_flags 0"
 
-				"de_lake"		    {}
-				"de_stmarc"			{}
-				"de_safehouse"	{}
-				"ar_shoots"			{}
-				"ar_baggage"		{}
-				"ar_lunacy"			{}
-				"ar_monastery"	{}
-				"de_dust2"	    {}
-				"de_inferno"	  {}
+        "ar_baggage" {}
+        "ar_dizzy" {}
+        "ar_lunacy" {}
+        "ar_monastery" {}
+        "ar_shoots" {}
+        "cs_agency" {}
+        "cs_assault" {}
+        "cs_italy" {}
+        "cs_militia" {}
+        "cs_office" {}
+        "de_ancient" {}
+        "de_anubis" {}
+        "de_bank" {}
+        "de_boyard" {}
+        "de_cache" {}
+        "de_canals" {}
+        "de_cbble" {}
+        "de_chalice" {}
+        "de_dust2" {}
+        "de_inferno" {}
+        "de_lake" {}
+        "de_mirage" {}
+        "de_nuke" {}
+        "de_overpass" {}
+        "de_safehouse" {}
+        "de_shortdust" {}
+        "de_shortnuke" {}
+        "de_stmarc" {}
+        "de_sugarcane" {}
+        "de_train" {}
+        "de_tuscan" {}
+        "de_vertigo" {}
 
+		    "workshop/319808082/ar_deagle5_nuke"
+        {
+            "display"      "ArmsRace: ar_deagle5_nuke"
+        }
+
+		    "workshop/221603249/de_marquis"
+        {
+            "display"      "ArmsRace: de_marquis"
+        }
+		    "workshop/150267492/de_chinatown"
+        {
+            "display"      "ArmsRace: de_chinatown"
+        }
+		    "workshop/174668691/cs_agency"
+        {
+            "display"      "ArmsRace: cs_agency"
+        }
 		    "workshop/127494596/The_Arena"
         {
-            "display"      "Arms Race: The_Arena"
+            "display"      "ArmsRace: The_Arena"
         }
 		    "workshop/126643563/ar_concrete"
         {
-            "display"      "Arms Race: ar_concrete"
+            "display"      "ArmsRace: ar_concrete"
         }
 		    "workshop/122521875/fy_pool_day"
         {
-            "display"      "Arms Race: fy_pool_day"
+            "display"      "ArmsRace: fy_pool_day"
         }
 		    "workshop/135565371/fy_pool_day_classic"
         {
-            "display"      "Arms Race: fy_pool_day_classic"
+            "display"      "ArmsRace: fy_pool_day_classic"
+        }
+		    "workshop/182604249/de_overgrown"
+        {
+            "display"      "ArmsRace: de_overgrown"
+        }
+		    "workshop/526448928/de_killhouse"
+        {
+            "display"      "ArmsRace: de_killhouse"
         }
 		    "workshop/882355656/de_dust2_css1"
         {
-            "display"      "Arms Race: de_dust2_css1"
+            "display"      "ArmsRace: de_dust2_css1"
         }
 		    "workshop/258081127/fy_iceworld"
         {
-            "display"      "Arms Race: fy_iceworld"
+            "display"      "ArmsRace: fy_iceworld"
         }
 		    "workshop/1172581352/de_nuke_css1"
         {
-            "display"      "Arms Race: de_nuke_css1"
+            "display"      "ArmsRace: de_nuke_css1"
+        }
+		    "workshop/219295593/cs_rush"
+        {
+            "display"      "ArmsRace: cs_rush"
         }
     }
 }
