@@ -190,11 +190,11 @@
 
 "umc_mapcycle"
 {
-    "GunGame"
+    "Deathmatch"
     {
-        "display-template"      "GunGame: {MAP}"
-        "postvote-command"      "sm_nextgamemode gungame"
-        "command" "game_type 0;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0; sm_quakesoundsv3_teamkill_mode 1; gg_enable;"
+        "display-template"      "DM: {MAP}"
+        "postvote-command"      "sm_nextgamemode deathmatch"
+        "command" "game_type 1;game_mode 2;sv_skirmish_id 0; sv_game_mode_flags 32; sm_quakesoundsv3_teamkill_mode 1"
 
         "ar_baggage" {}
         "ar_dizzy" {}
@@ -246,11 +246,11 @@
 		    "workshop/219295593/cs_rush" {}
     }
 
-    "Deathmatch"
+    "GunGame"
     {
-        "display-template"      "DM: {MAP}"
-        "postvote-command"      "sm_nextgamemode deathmatch"
-        "command" "game_type 1;game_mode 2;sv_skirmish_id 0; sv_game_mode_flags 32; sm_quakesoundsv3_teamkill_mode 1"
+        "display-template"      "GunGame: {MAP}"
+        "postvote-command"      "sm_nextgamemode gungame"
+        "command" "game_type 0;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0; sm_quakesoundsv3_teamkill_mode 1; gg_enable;"
 
         "ar_baggage" {}
         "ar_dizzy" {}
