@@ -66,6 +66,30 @@
 							type = "selector"
 							children =
 							[
+								// Buy if we have to
+								{
+									type = "condition_is_empty"
+									input = "ShouldBuy"
+									negated = 1
+									child =
+									{
+										// sequencer: evaluate first to last child, in order
+										type = "sequencer"
+										children =
+										[
+											{
+												type = "action_wait"
+												wait_time_min = 3
+												wait_time_max = 3
+											},
+											{
+												type = "decorator_remove_key"
+												input = "ShouldBuy"
+											}
+										]
+									}
+								},
+								// Else: face the damage source if we're taking damage
 								{
 									type = "decorator_sensor"
 									entity_type_filter = "DAMAGE"
