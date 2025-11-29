@@ -7,4 +7,6 @@ WORKDIR /home/steam/server
 ENTRYPOINT ["/home/steam/server/srcds_run","-game","csgo","-console","-usercon","-tickrate","128","-strictportbind","-tvdisable","+tv_enable","0","+sv_hibernate_when_empty","1","+sv_lan","1","-maxplayers_override","32"]
 
 
-COPY --chown=steam csgo /home/steam/server/csgo
+COPY --chown=steam csgo/sound /home/steam/server/csgo/sound
+COPY --chown=steam csgo/addons /home/steam/server/csgo/addons
+COPY --chown=steam csgo/cfg /home/steam/server/csgo/cfg
