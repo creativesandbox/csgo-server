@@ -192,6 +192,7 @@
 {
     "Gun Game"
     {
+        "display-template"      "{MAP} (Gun Game)"
         "command" "sm_nextgamemode gungame"
 
 		    "ar_shoots" {}
@@ -216,6 +217,7 @@
     
     "Deathmatch"
     {
+        "display-template"      "{MAP} (Deathmatch)"
         "command" "sm_nextgamemode deathmatch"
         "de_dust2"			 {}
         "de_inferno"		 {}
@@ -236,6 +238,7 @@
     
     "AWP"
     {
+        "display-template"      "{MAP} (AWP)"
         "command" "sm_nextgamemode awp"
         "workshop/144274038/awp_infinte_v2" { }
         "workshop/429056610/awp_tower_dev" { }
@@ -243,6 +246,7 @@
     
     "Battle Royale"
     {
+        "display-template"      "{MAP} (Battle Royale)"
         "command" "sm_nextgamemode br"
         "workshop/499172310/br_electrified" {  }
         "workshop/500852664/br_flood_v1" { }
@@ -255,6 +259,7 @@
     
     "Retake"
     {
+        "display-template"      "{MAP} (Retake)"
         "command" "sm_nextgamemode retake"
 
 		    "de_ancient" {}
@@ -269,6 +274,7 @@
     
     "One in the Chamber"
     {
+        "display-template"      "{MAP} (One Chamber)"
         "command" "sm_nextgamemode oneinthechamber"
 
         "de_dust2"			 {}
