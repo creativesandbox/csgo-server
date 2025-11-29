@@ -306,7 +306,7 @@
     {
         "display-template"      "One Chamber: {MAP}"
         "pre-command"           "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 12; sv_game_mode_flags 0"
-        "command"               "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 12; sv_game_mode_flags 0;sm_quakesoundsv3_teamkill_mode 1;mp_give_player_c4 0;mp_death_drop_gun 0;mp_buytime 0;mp_ct_default_primary 0;mp_t_default_primary 0;mp_ct_default_secondary weapon_deagle;mp_t_default_secondary weapon_deagle;mp_ct_default_melee weapon_knife;mp_t_default_melee weapon_knife;mp_damage_scale_ct_body 100;mp_damage_scale_ct_head 100;mp_damage_scale_t_body 100;mp_damage_scale_t_head 100;mp_maxmoney 0;mp_startmoney 0; mp_default_team_winner_no_objective 0; mp_ignore_round_win_conditions 0; mp_teammates_are_enemies 1; mp_force_assign_teams 1"
+        "command"               "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 12; sv_game_mode_flags 0; exec gamemode_one_in_the_chamber.cfg"
 
         "ar_baggage" {}
         "ar_dizzy" {}
