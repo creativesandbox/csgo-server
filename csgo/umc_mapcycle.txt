@@ -369,6 +369,10 @@
 		    {
             "display" "awp_tower_dev"
 		    }
+        "workshop/171033381/awp_minecraft"
+		    {
+            "display" "awp_minecraft"
+		    }
     }
 
     "BattleRoyale"
