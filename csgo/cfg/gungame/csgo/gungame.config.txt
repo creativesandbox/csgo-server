@@ -7,7 +7,7 @@
         /* ----- [1.1. main] ----- */
         
         /* Enables/Disables GunGame Mod */
-        "Enabled" "1"
+        "Enabled" "0"
 
         /**
          * Do not fast switch on level up for this weapons.
