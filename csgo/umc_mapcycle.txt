@@ -324,10 +324,6 @@
         {
             "display"      "GunGame: fy_pool_day_classic"
         }
-		    "workshop/835631624/fy_snow_rework_kp"
-        {
-            "display"      "GunGame: fy_snow_rework_kp"
-        }
 		    "workshop/882355656/de_dust2_css1"
         {
             "display"      "GunGame: de_dust2_css1"
@@ -484,10 +480,6 @@
 		    "workshop/135565371/fy_pool_day_classic"
         {
             "display"      "Arms Race: fy_pool_day_classic"
-        }
-		    "workshop/835631624/fy_snow_rework_kp"
-        {
-            "display"      "Arms Race: fy_snow_rework_kp"
         }
 		    "workshop/882355656/de_dust2_css1"
         {
