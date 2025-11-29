@@ -371,9 +371,9 @@
 		    {
             "display" "br_killzones"
 		    }
-        "workshop/926327189/br_drop_v1-3"
+        "workshop/926327189/br_drop_v2"
 		    {
-            "display" "br_drop_v1"
+            "display" "br_drop_v2"
 		    }
         "workshop/1297317787/br_elevate_v2"
 		    {
