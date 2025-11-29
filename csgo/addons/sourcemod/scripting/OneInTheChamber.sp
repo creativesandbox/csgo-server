@@ -296,22 +296,11 @@ stock void GiveKillAmmo(int client)
 	char classname[32];
 	GetEntityClassname(weapon, classname, 32);
 
-	if (!StrEqual(classname, "weapon_deagle", false))
-	{
-		RemovePlayerItem(client, weapon);
-		AcceptEntityInput(weapon, "kill");
-		//weapon = GiveWeapon(client, "weapon_deagle");
-		weapon = GivePlayerItem(client, "weapon_deagle");
-	}
-
-
-	if(GetEntData(weapon, m_iClip1) == 0)
-	{
-		SetEntData(weapon, m_iClip1, 1);
-		return;
-	}
-
-  SetEntData(weapon, m_iPrimaryReserveAmmo, 1);
+  RemovePlayerItem(client, weapon);
+  AcceptEntityInput(weapon, "kill");
+  //weapon = GiveWeapon(client, "weapon_deagle");
+  weapon = GivePlayerItem(client, "weapon_deagle");
+  SetEntData(weapon, m_iClip1, 1);
 }
 
 stock void StripClientWeapons(int client)
