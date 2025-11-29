@@ -8,6 +8,7 @@ ENTRYPOINT ["/home/steam/server/srcds_run","-game","csgo","-console","-usercon",
 
 
 COPY --chown=steam csgo/sound /home/steam/server/csgo/sound
+COPY --chown=steam csgo/scripts /home/steam/server/csgo/scripts
 COPY --chown=steam csgo/addons /home/steam/server/csgo/addons
 COPY --chown=steam csgo/cfg /home/steam/server/csgo/cfg
 COPY --chown=steam csgo/*.txt /home/steam/server/csgo/
