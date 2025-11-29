@@ -193,7 +193,7 @@
     "GunGame"
     {
         "display-template"      "GunGame: {MAP}"
-        "postvote-command"      "sm_nextgamemode gungame"
+        "postvote-command"      "game_type 0; game_type 0; sv_game_mode_flags 0; sv_skirmish_id 0; sm_nextgamemode gungame"
 
         "ar_baggage" {}
         "ar_dizzy" {}
@@ -248,7 +248,7 @@
     "Deathmatch"
     {
         "display-template"      "DM: {MAP}"
-        "postvote-command"      "sm_nextgamemode deathmatch"
+        "postvote-command"      "sv_game_mode_flags 0; sv_skirmish_id 0; sm_nextgamemode deathmatch"
 
 
         "ar_baggage" {}
@@ -304,7 +304,7 @@
     "OneChamber"
     {
         "display-template"      "One Chamber: {MAP}"
-        "postvote-command"      "sm_nextgamemode oneinthechamber"
+        "postvote-command"      "sv_game_mode_flags 0; sv_skirmish_id 0; sm_nextgamemode oneinthechamber"
 
         "ar_baggage" {}
         "ar_dizzy" {}
@@ -359,7 +359,7 @@
     "AWP"
     {
         "display-template"      "AMP: {MAP}"
-        "postvote-command"      "sm_nextgamemode awp"
+        "postvote-command"      "sv_game_mode_flags 0; sv_skirmish_id 0; sm_nextgamemode awp"
 
         "workshop/144274038/awp_infinte_v2" { }
         "workshop/429056610/awp_tower_dev" { }
@@ -372,7 +372,7 @@
     "BattleRoyale"
     {
         "display-template"      "BR: {MAP}"
-        "postvote-command"      "sm_nextgamemode br"
+        "postvote-command"      "sv_game_mode_flags 0; sv_skirmish_id 0; sm_nextgamemode br"
 
         "workshop/499172310/br_electrified" {}
         "workshop/500852664/br_flood_v2" { }
