@@ -229,21 +229,67 @@
         "de_tuscan" {}
         "de_vertigo" {}
 
-		    "workshop/319808082/ar_deagle5_nuke" {}
-		    "workshop/221603249/de_marquis" {}
-		    "workshop/150267492/de_chinatown" {}
-		    "workshop/174668691/cs_agency" {}
-		    "workshop/127494596/The_Arena" {}
-		    "workshop/126643563/ar_concrete" {}
-		    "workshop/122521875/fy_pool_day" {}
-		    "workshop/135565371/fy_pool_day_classic" {}
-		    "workshop/182604249/de_overgrown" {}
-		    "workshop/526448928/de_killhouse" {}
-		    "workshop/835631624/fy_snow_rework_kp" {}
-		    "workshop/882355656/de_dust2_css1" {}
-		    "workshop/258081127/fy_iceworld" {}
-		    "workshop/1172581352/de_nuke_css1" {}
-		    "workshop/219295593/cs_rush" {}
+		    "workshop/319808082/ar_deagle5_nuke"
+        {
+            "display"      "DM: ar_deagle5_nuke"
+        }
+        
+		    "workshop/221603249/de_marquis"
+        {
+            "display"      "DM: de_marquis"
+        }
+		    "workshop/150267492/de_chinatown"
+        {
+            "display"      "DM: de_chinatown"
+        }
+		    "workshop/174668691/cs_agency"
+        {
+            "display"      "DM: cs_agency"
+        }
+		    "workshop/127494596/The_Arena"
+        {
+            "display"      "DM: The_Arena"
+        }
+		    "workshop/126643563/ar_concrete"
+        {
+            "display"      "DM: ar_concrete"
+        }
+		    "workshop/122521875/fy_pool_day"
+        {
+            "display"      "DM: fy_pool_day"
+        }
+		    "workshop/135565371/fy_pool_day_classic"
+        {
+            "display"      "DM: fy_pool_day_classic"
+        }
+		    "workshop/182604249/de_overgrown"
+        {
+            "display"      "DM: de_overgrown"
+        }
+		    "workshop/526448928/de_killhouse"
+        {
+            "display"      "DM: de_killhouse"
+        }
+		    "workshop/835631624/fy_snow_rework_kp"
+        {
+            "display"      "DM: fy_snow_rework_kp"
+        }
+		    "workshop/882355656/de_dust2_css1"
+        {
+            "display"      "DM: de_dust2_css1"
+        }
+		    "workshop/258081127/fy_iceworld"
+        {
+            "display"      "DM: fy_iceworld"
+        }
+		    "workshop/1172581352/de_nuke_css1"
+        {
+            "display"      "DM: de_nuke_css1"
+        }
+		    "workshop/219295593/cs_rush"
+        {
+            "display"      "DM: cs_rush"
+        }
     }
 
     "GunGame"
@@ -285,21 +331,69 @@
         "de_tuscan" {}
         "de_vertigo" {}
 
-		    "workshop/319808082/ar_deagle5_nuke" {}
-		    "workshop/221603249/de_marquis" {}
-		    "workshop/150267492/de_chinatown" {}
-		    "workshop/174668691/cs_agency" {}
-		    "workshop/127494596/The_Arena" {}
-		    "workshop/126643563/ar_concrete" {}
-		    "workshop/122521875/fy_pool_day" {}
-		    "workshop/135565371/fy_pool_day_classic" {}
-		    "workshop/182604249/de_overgrown" {}
-		    "workshop/526448928/de_killhouse" {}
-		    "workshop/835631624/fy_snow_rework_kp" {}
-		    "workshop/882355656/de_dust2_css1" {}
-		    "workshop/258081127/fy_iceworld" {}
-		    "workshop/1172581352/de_nuke_css1" {}
-		    "workshop/219295593/cs_rush" {}
+		    
+
+		    "workshop/319808082/ar_deagle5_nuke"
+        {
+            "display"      "GunGame: ar_deagle5_nuke"
+        }
+        
+		    "workshop/221603249/de_marquis"
+        {
+            "display"      "GunGame: de_marquis"
+        }
+		    "workshop/150267492/de_chinatown"
+        {
+            "display"      "GunGame: de_chinatown"
+        }
+		    "workshop/174668691/cs_agency"
+        {
+            "display"      "GunGame: cs_agency"
+        }
+		    "workshop/127494596/The_Arena"
+        {
+            "display"      "GunGame: The_Arena"
+        }
+		    "workshop/126643563/ar_concrete"
+        {
+            "display"      "GunGame: ar_concrete"
+        }
+		    "workshop/122521875/fy_pool_day"
+        {
+            "display"      "GunGame: fy_pool_day"
+        }
+		    "workshop/135565371/fy_pool_day_classic"
+        {
+            "display"      "GunGame: fy_pool_day_classic"
+        }
+		    "workshop/182604249/de_overgrown"
+        {
+            "display"      "GunGame: de_overgrown"
+        }
+		    "workshop/526448928/de_killhouse"
+        {
+            "display"      "GunGame: de_killhouse"
+        }
+		    "workshop/835631624/fy_snow_rework_kp"
+        {
+            "display"      "GunGame: fy_snow_rework_kp"
+        }
+		    "workshop/882355656/de_dust2_css1"
+        {
+            "display"      "GunGame: de_dust2_css1"
+        }
+		    "workshop/258081127/fy_iceworld"
+        {
+            "display"      "GunGame: fy_iceworld"
+        }
+		    "workshop/1172581352/de_nuke_css1"
+        {
+            "display"      "GunGame: de_nuke_css1"
+        }
+		    "workshop/219295593/cs_rush"
+        {
+            "display"      "GunGame: cs_rush"
+        }
     }
 
     "OneChamber"
@@ -341,21 +435,66 @@
         "de_tuscan" {}
         "de_vertigo" {}
 
-		    "workshop/319808082/ar_deagle5_nuke" {}
-		    "workshop/221603249/de_marquis" {}
-		    "workshop/150267492/de_chinatown" {}
-		    "workshop/174668691/cs_agency" {}
-		    "workshop/127494596/The_Arena" {}
-		    "workshop/126643563/ar_concrete" {}
-		    "workshop/122521875/fy_pool_day" {}
-		    "workshop/135565371/fy_pool_day_classic" {}
-		    "workshop/182604249/de_overgrown" {}
-		    "workshop/526448928/de_killhouse" {}
-		    "workshop/835631624/fy_snow_rework_kp" {}
-		    "workshop/882355656/de_dust2_css1" {}
-		    "workshop/258081127/fy_iceworld" {}
-		    "workshop/1172581352/de_nuke_css1" {}
-		    "workshop/219295593/cs_rush" {}
+		    "workshop/319808082/ar_deagle5_nuke"
+        {
+            "display"      "One Chamber: ar_deagle5_nuke"
+        }
+		    "workshop/221603249/de_marquis"
+        {
+            "display"      "One Chamber: de_marquis"
+        }
+		    "workshop/150267492/de_chinatown"
+        {
+            "display"      "One Chamber: de_chinatown"
+        }
+		    "workshop/174668691/cs_agency"
+        {
+            "display"      "One Chamber: cs_agency"
+        }
+		    "workshop/127494596/The_Arena"
+        {
+            "display"      "One Chamber: The_Arena"
+        }
+		    "workshop/126643563/ar_concrete"
+        {
+            "display"      "One Chamber: ar_concrete"
+        }
+		    "workshop/122521875/fy_pool_day"
+        {
+            "display"      "One Chamber: fy_pool_day"
+        }
+		    "workshop/135565371/fy_pool_day_classic"
+        {
+            "display"      "One Chamber: fy_pool_day_classic"
+        }
+		    "workshop/182604249/de_overgrown"
+        {
+            "display"      "One Chamber: de_overgrown"
+        }
+		    "workshop/526448928/de_killhouse"
+        {
+            "display"      "One Chamber: de_killhouse"
+        }
+		    "workshop/835631624/fy_snow_rework_kp"
+        {
+            "display"      "One Chamber: fy_snow_rework_kp"
+        }
+		    "workshop/882355656/de_dust2_css1"
+        {
+            "display"      "One Chamber: de_dust2_css1"
+        }
+		    "workshop/258081127/fy_iceworld"
+        {
+            "display"      "One Chamber: fy_iceworld"
+        }
+		    "workshop/1172581352/de_nuke_css1"
+        {
+            "display"      "One Chamber: de_nuke_css1"
+        }
+		    "workshop/219295593/cs_rush"
+        {
+            "display"      "One Chamber: cs_rush"
+        }
     }
 
     "AWP"
@@ -379,12 +518,12 @@
         "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 3;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0"
         "command"               "sm plugins unload disabled/OneInTheChamber"
 
-        "workshop/499172310/br_electrified" {}
+        "workshop/499172310/br_electrified" { }
         "workshop/500852664/br_flood_v2" { }
         "workshop/937614537/br_slopes" { }
         "workshop/850490634/br_killzones" { }
         "workshop/926327189/br_drop_v2" { }
-        "workshop/1297317787/br_elevate_v2"  {  }
+        "workshop/1297317787/br_elevate_v2"  { }
         "workshop/1313180745/br_speed" { }
     }
 

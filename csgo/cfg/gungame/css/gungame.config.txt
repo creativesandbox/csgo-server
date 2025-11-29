@@ -521,7 +521,7 @@
         /* ----- [1.7. warmup] ----- */
         
         /* Enables Warmup Round*/
-        "WarmupEnabled" "1"
+        "WarmupEnabled" "0"
 
         /* Warmup time length */
         "WarmupTimeLength" "60"
@@ -639,9 +639,9 @@
         "LevelDown"         "gungame/smb3_powerdown.mp3"
         "Triple"            "gungame/smb_star.mp3"
         "Autoff"            "gungame/smb_warning2.mp3"
-        "MultiKill"         "gungame/multikill.mp3"   // (Ñ) VALVE
+        "MultiKill"         "gungame/multikill.mp3"   // (ï¿½) VALVE
         /* Put each song filename in this list seperated by commas */
-        "Winner"            "gungame/winner.mp3"      // (Ñ) VALVE
-        "WarmupTimerSound"  "gungame/timer.mp3"       // (Ñ) VALVE
+        "Winner"            "gungame/winner.mp3"      // (ï¿½) VALVE
+        "WarmupTimerSound"  "gungame/timer.mp3"       // (ï¿½) VALVE
     }
 }
