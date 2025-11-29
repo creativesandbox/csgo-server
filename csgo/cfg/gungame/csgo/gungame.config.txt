@@ -555,10 +555,10 @@
         /* ----- [1.7. warmup] ----- */
         
         /* Enables Warmup Round*/
-        "WarmupEnabled" "0"
+        "WarmupEnabled" "1"
 
         /* Warmup time length */
-        "WarmupTimeLength" "60"
+        "WarmupTimeLength" "15"
 
         /**
          * Give random weapon on warmup.
