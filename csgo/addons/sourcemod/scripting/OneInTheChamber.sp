@@ -260,7 +260,10 @@ stock void GiveKillAmmo(int client)
 	GetEntityClassname(weapon, classname, 32);
 
   SetEntData(weapon, m_iClip1, 1);
+  SetEntProp(weapon, Prop_Send, "m_iClip1", 1);
+
   SetEntData(weapon, m_iPrimaryReserveAmmo, 0);
+  SetEntProp(weapon, Prop_Send, "m_iPrimaryReserveAmmoCount", 0);
 }
 
 stock void StripClientWeapons(int client)
