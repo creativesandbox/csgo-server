@@ -193,8 +193,8 @@
     "Deathmatch"
     {
         "display-template"      "DM: {MAP}"
-        "postvote-command"      "sm_nextgamemode deathmatch"
-        "command" "game_type 1;game_mode 2;sv_skirmish_id 0; sv_game_mode_flags 32; sm_quakesoundsv3_teamkill_mode 1"
+        "pre-command" "sm plugins unload disabled/OneInTheChamber; game_type 1;game_mode 2;sv_skirmish_id 0; sv_game_mode_flags 32"
+        "command" "sm plugins unload disabled/OneInTheChamber; game_type 1;game_mode 2;sv_skirmish_id 0; sv_game_mode_flags 32; sm_quakesoundsv3_teamkill_mode 1"
 
         "ar_baggage" {}
         "ar_dizzy" {}
@@ -249,8 +249,8 @@
     "GunGame"
     {
         "display-template"      "GunGame: {MAP}"
-        "postvote-command"      "sm_nextgamemode gungame"
-        "command" "game_type 0;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0; sm_quakesoundsv3_teamkill_mode 1; gg_enable;"
+        "pre-command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0"
+        "command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0; sm_quakesoundsv3_teamkill_mode 1; gg_enable;"
 
         "ar_baggage" {}
         "ar_dizzy" {}
@@ -305,9 +305,8 @@
     "OneChamber"
     {
         "display-template"      "One Chamber: {MAP}"
-        "postvote-command"      "sm_nextgamemode oneinthechamber"
-
-        "command"     "game_type 0;game_mode 0;sv_skirmish_id 12;sm_quakesoundsv3_teamkill_mode 1;mp_give_player_c4 0;mp_death_drop_gun 0;mp_buytime 0;mp_ct_default_primary 0;mp_t_default_primary 0;mp_ct_default_secondary weapon_deagle;mp_t_default_secondary weapon_deagle;mp_ct_default_melee weapon_knife;mp_t_default_melee weapon_knife;mp_damage_scale_ct_body 100;mp_damage_scale_ct_head 100;mp_damage_scale_t_body 100;mp_damage_scale_t_head 100;mp_maxmoney 0;mp_startmoney 0; mp_default_team_winner_no_objective 0; mp_ignore_round_win_conditions 0; mp_teammates_are_enemies 1; mp_force_assign_teams 1"
+        "pre-command"           "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 12; sv_game_mode_flags 0"
+        "command"               "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 12; sv_game_mode_flags 0;sm_quakesoundsv3_teamkill_mode 1;mp_give_player_c4 0;mp_death_drop_gun 0;mp_buytime 0;mp_ct_default_primary 0;mp_t_default_primary 0;mp_ct_default_secondary weapon_deagle;mp_t_default_secondary weapon_deagle;mp_ct_default_melee weapon_knife;mp_t_default_melee weapon_knife;mp_damage_scale_ct_body 100;mp_damage_scale_ct_head 100;mp_damage_scale_t_body 100;mp_damage_scale_t_head 100;mp_maxmoney 0;mp_startmoney 0; mp_default_team_winner_no_objective 0; mp_ignore_round_win_conditions 0; mp_teammates_are_enemies 1; mp_force_assign_teams 1"
 
         "ar_baggage" {}
         "ar_dizzy" {}
@@ -362,9 +361,9 @@
     "AWP"
     {
         "display-template"      "AMP: {MAP}"
-        "postvote-command"      "sm_nextgamemode awp"
 
-        "command"     "game_type 3;game_mode 0"
+        "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 3;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0"
+        "command"               "sm plugins unload disabled/OneInTheChamber; game_type 3;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0"
 
         "workshop/144274038/awp_infinte_v2" { }
         "workshop/429056610/awp_tower_dev" { }
@@ -377,7 +376,8 @@
     "BattleRoyale"
     {
         "display-template"      "BR: {MAP}"
-        "postvote-command"      "sm_nextgamemode br"
+        "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 3;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0"
+        "command"               "sm plugins unload disabled/OneInTheChamber"
 
         "workshop/499172310/br_electrified" {}
         "workshop/500852664/br_flood_v2" { }
@@ -391,8 +391,8 @@
     "Retake"
     {
         "display-template"      "Retake: {MAP}"
-        "postvote-command"      "sm_nextgamemode retake"
-        "command"               "game_type 0;game_mode 0;sv_skirmish_id 12;sv_game_mode_flags 0"
+        "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 12;sv_game_mode_flags 0"
+        "command"               "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 12;sv_game_mode_flags 0"
 
 		    "de_ancient" {}
 		    "de_train" {}
