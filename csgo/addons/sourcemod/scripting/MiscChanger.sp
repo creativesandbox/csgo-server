@@ -360,7 +360,7 @@ public void OnClientDisconnect(int client)
 	if(g_Database)
 	{
 		char sQuery[256];
-		Format(sQuery, sizeof(sQuery), "INSERT INTO `misc_changer` (`account_id`, `musickit_num`, `coin_or_pin_def_index`) VALUES (%d, %d, %d) ON DUPLICATE KEY UPDATE `musickit_num` = VALUES(`musickit_num`), `coin_or_pin_def_index` = VALUES(`coin_or_pin_def_index`)",
+		Format(sQuery, sizeof(sQuery), "INSERT INTO `misc_changer` (`account_id`, `musickit_num`, `coin_or_pin_def_index`) VALUES (%d, %d, %d) ON CONFLICT(account_id) DO UPDATE SET `musickit_num` = excluded.musickit_num, `coin_or_pin_def_index` = excluded.coin_or_pin_def_index;",
 			g_PlayerInfo[client].iAccountID,
 			g_PlayerInfo[client].iMusicKitNum,
 			g_PlayerInfo[client].iPinOrCoinDefIndex
