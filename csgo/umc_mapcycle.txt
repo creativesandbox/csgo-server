@@ -381,6 +381,7 @@
 		    "workshop/882355656/de_dust2_css1"
         {
             "display"      "GunGame: de_dust2_css1"
+        }
 		    "workshop/258081127/fy_iceworld"
         {
             "display"      "GunGame: fy_iceworld"
@@ -511,7 +512,7 @@
         "workshop/350728807/sniper_t6" { }
     }
 
-    "Battle Royale"
+    "BattleRoyale"
     {
         "display-template"      "BR: {MAP}"
         "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 3;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0"
@@ -543,7 +544,7 @@
     }
 
 
-    "flyingscoutsman"
+    "FlyingScoutsMan"
     {
         "display-template"      "FlyScout: {MAP}"
         "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 3;sv_game_mode_flags 0; bot_quota 0"
