@@ -249,8 +249,8 @@
     "GunGame"
     {
         "display-template"      "GunGame: {MAP}"
-        "pre-command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0"
-        "command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0; sm_quakesoundsv3_teamkill_mode 1; gg_enable;"
+        "pre-command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2; sv_game_mode_flags 0"
+        "command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2; sv_game_mode_flags 0; exec gamemode_gungame.cfg; gg_enable;"
 
         "ar_baggage" {}
         "ar_dizzy" {}
@@ -305,8 +305,8 @@
     "OneChamber"
     {
         "display-template"      "One Chamber: {MAP}"
-        "pre-command"           "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0"
-        "command"               "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 0; sv_game_mode_flags 0; exec gamemode_one_in_the_chamber.cfg"
+        "pre-command"           "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2; sv_game_mode_flags 0"
+        "command"               "sm plugins load disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 2; sv_game_mode_flags 0; exec gamemode_one_in_the_chamber.cfg"
 
         "ar_baggage" {}
         "ar_dizzy" {}

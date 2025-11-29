@@ -30,7 +30,7 @@
          *      1 - Enabled.
          *      0 - Disabled.
          */
-        "FastSwitchOnLevelUp" "0"
+        "FastSwitchOnLevelUp" "1"
 
         /**
          * Switch weapon without delays when player changes weapon by himself.
@@ -41,7 +41,7 @@
          *      1 - Enabled.
          *      0 - Disabled.
          */
-        "FastSwitchOnChangeWeapon" "0"
+        "FastSwitchOnChangeWeapon" "1"
 
         /**
          * Freeze players after win.
@@ -218,7 +218,7 @@
          * 0 - Disabled
          * 1 - Enabled
          */
-        "FFA" "1"
+        "FFA" "0"
 
         /** 
          * Enable friendly fire on defined level.
@@ -555,7 +555,7 @@
         /* ----- [1.7. warmup] ----- */
         
         /* Enables Warmup Round*/
-        "WarmupEnabled" "1"
+        "WarmupEnabled" "0"
 
         /* Warmup time length */
         "WarmupTimeLength" "60"
@@ -595,7 +595,7 @@
         /* ===== [3. GUNGAME AFK CONFIG] ===== */
         
         /* Enables or disables built in Afk management system */
-        "AfkManagement" "1"
+        "AfkManagement" "0"
 
         /* Kick player on x number of afk deaths. */
         "AfkDeaths" "5"
@@ -623,7 +623,7 @@
         /* ===== [5. GUNGAME DISPLAY WINNER CONFIG] ===== */
         
         /* Display winner in MOTD window. */
-        "DisplayWinnerMotd" "1"
+        "DisplayWinnerMotd" "0"
 
         /**
           * URL to display in MOTD window. 
@@ -651,7 +651,7 @@
          * Dont use bots levels for handicap calculation. 
          * Dont give handicap level to bots too.
          */
-        "HandicapSkipBots" "0"
+        "HandicapSkipBots" "1"
 
         /* Can bots win the game otherwise when they reach the last weapon and nothing will happen */
         "BotsCanWinGame" "0"
