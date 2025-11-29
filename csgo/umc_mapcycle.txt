@@ -544,11 +544,25 @@
     }
 
 
+    "flyingscoutsman"
+    {
+        "display-template"      "FlyScout: {MAP}"
+        "pre-command"           "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 3;sv_game_mode_flags 0"
+        "command"               "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 3;sv_game_mode_flags 0"
+
+		    "de_lake" {}
+		    "de_safehouse" {}
+		    "ar_dizzy" {}
+		    "ar_lunacy" {}
+		    "ar_shoots" {}
+    }
+
+
     "ArmsRace"
     {
         "display-template"      "ArmsRace: {MAP}"
-        "pre-command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 10; sv_game_mode_flags 0"
-        "command" "sm plugins unload disabled/OneInTheChamber; game_type 0;game_mode 0;sv_skirmish_id 10; sv_game_mode_flags 0"
+        "pre-command" "sm plugins unload disabled/OneInTheChamber; game_type 1; game_mode 0;sv_skirmish_id 10; sv_game_mode_flags 0"
+        "command" "sm plugins unload disabled/OneInTheChamber; game_type 1; game_mode 0;sv_skirmish_id 10; sv_game_mode_flags 0"
 
         "ar_baggage" {}
         "ar_dizzy" {}
