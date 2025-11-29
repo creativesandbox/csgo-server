@@ -290,7 +290,6 @@ public void Event_PlayerDeathPre(Event event, const char[] name, bool dontBroadc
 stock void GiveKillAmmo(int client)
 {
 	int weapon = GetPlayerWeaponSlot(client, CS_SLOT_SECONDARY);
-
 	if (weapon == -1)
 		return;
 
@@ -301,11 +300,18 @@ stock void GiveKillAmmo(int client)
 	{
 		RemovePlayerItem(client, weapon);
 		AcceptEntityInput(weapon, "kill");
+		//weapon = GiveWeapon(client, "weapon_deagle");
 		weapon = GivePlayerItem(client, "weapon_deagle");
 	}
 
-  SetEntData(weapon, m_iClip1, 1);
-  return;
+
+	if(GetEntData(weapon, m_iClip1) == 0)
+	{
+		SetEntData(weapon, m_iClip1, 1);
+		return;
+	}
+
+  SetEntData(weapon, m_iPrimaryReserveAmmo, 1);
 }
 
 stock void StripClientWeapons(int client)

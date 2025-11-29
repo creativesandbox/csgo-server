@@ -251,7 +251,6 @@
         "postvote-command"      "sm_nextgamemode deathmatch"
 
 
-
         "ar_baggage" {}
         "ar_dizzy" {}
         "ar_lunacy" {}
@@ -359,7 +358,7 @@
 
     "AWP"
     {
-        "display-template"      "AMP {MAP}"
+        "display-template"      "AMP: {MAP}"
         "postvote-command"      "sm_nextgamemode awp"
 
         "workshop/144274038/awp_infinte_v2" { }
