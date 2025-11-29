@@ -4,48 +4,58 @@
 	{
 		"gungame"
 		{
+			"value"				"1"
+			"nameID"			"#SFUI_GameTypeGungame"
+
 			"gameModes"
 			{
-				"gungameprogressive"
-				{
-					"weaponprogression_ct"
-					{
-						"awp"	  	{ "kills"	"2" }
-						"mag7"	 { "kills"	"2" }
-						"g3sg1" 	{ "kills"	"2" }
-						"negev" 	{ "kills"	"2" }
-						"scar20" { "kills"	"2" }
-						"m249"	 { "kills"	"2" }
-						"ak47"	 { "kills"	"2" }
-						"m4a1"	 { "kills"	"2" }
-						"sg556"	 { "kills"	"2" }
-						"aug"	 { "kills"	"2" }
-						"galilar"	 { "kills"	"2" }
-						"famas"	 { "kills"	"2" }
-						"mac10"	 { "kills"	"2" }
-						"mp9"	 { "kills"	"2" }
-						"bizon"	 { "kills"	"2" }
-						"p90"	 { "kills"	"2" }
-						"sawedoff"	 { "kills"	"2" }
-						"ump45"	 { "kills"	"2" }
-						"xm1014"	 { "kills"	"2" }
-						"mp7"	 { "kills"	"2" }
-						"nova"	 { "kills"	"2" }
-						"nova"	 { "kills"	"2" }
-						"ssg08"	 { "kills"	"2" }
-						"deagle"	 { "kills"	"2" }
-						"elite"	 { "kills"	"2" }
-						"tec9"	 { "kills"	"2" }
-						"hkp2000"	 { "kills"	"2" }
-						"fiveseven"	 { "kills"	"2" }
-						"p250"	 { "kills"	"2" }
-						"glock"	 { "kills"	"2" }
-						"hegrenade"	 { "kills"	"2" }
-						"knifegg"	 { "kills"	"1" }
-					}
+			  "gungameprogressive"
+        {
+          "value"				"0"
+          "nameID"			"#SFUI_GameModeGGProgressive"
+          "descID"			"#SFUI_GameModeGGProgressiveDesc"
+          "descID_List"	"#SFUI_GameModeGGProgressiveDescList"
+          "uid"			   	"11"
+          "maxplayers"	"64"
 
-					"weaponprogression_t"
-					{
+          // These are the descriptive ui elements to display in the information box on.
+          // These key/values should be pairs of strings.  The "key" will appear in the left
+          // column, the "value" will appear in the right column.
+          "ui"
+          {
+            "0"		{ "label" "#SFUI_WinMatchColon"			"value" "30 #SFUI_Minutes" }
+            "1"		{ "label" "#SFUI_SpectateColon"			"value" "#SFUI_SpectateAnyone" }
+            "2"		{ "label" "#SFUI_BotsColon"				"value" "#SFUI_BotDifficulty2" }
+          }
+
+          // These are the configs that get executed when a game mode of this type is created
+          "exec"
+          {
+            "exec" "gamemode_armsrace.cfg"
+            "exec" "gamemode_armsrace_server.cfg"
+          }
+
+          // Map groups for offline modes
+          "mapgroupsSP"
+          {
+            "random_ar"			"0"
+            "mg_ar_baggage"		"1"
+            "mg_ar_shoots"		"2"
+            "mg_ar_lake"		"3"
+            "mg_ar_stmarc"		"4"
+            "mg_ar_safehouse"	"5"
+            "mg_ar_lunacy"		"6"
+            "mg_ar_monastery"	"7"
+          }
+
+          // Map groups for online modes
+          "mapgroupsMP"
+          {
+            "mg_armsrace"	"0"
+          }
+
+          "weaponprogression_ct"
+          {
 						"awp"	  	{ "kills"	"2" }
 						"mag7"	 { "kills"	"2" }
 						"g3sg1" 	{ "kills"	"2" }
@@ -78,8 +88,44 @@
 						"glock"	 { "kills"	"2" }
 						"hegrenade"	 { "kills"	"2" }
 						"knifegg"	 { "kills"	"1" }
-					}
-				}
+          }
+
+          "weaponprogression_t"
+          {
+						"awp"	  	{ "kills"	"2" }
+						"mag7"	 { "kills"	"2" }
+						"g3sg1" 	{ "kills"	"2" }
+						"negev" 	{ "kills"	"2" }
+						"scar20" { "kills"	"2" }
+						"m249"	 { "kills"	"2" }
+						"ak47"	 { "kills"	"2" }
+						"m4a1"	 { "kills"	"2" }
+						"sg556"	 { "kills"	"2" }
+						"aug"	 { "kills"	"2" }
+						"galilar"	 { "kills"	"2" }
+						"famas"	 { "kills"	"2" }
+						"mac10"	 { "kills"	"2" }
+						"mp9"	 { "kills"	"2" }
+						"bizon"	 { "kills"	"2" }
+						"p90"	 { "kills"	"2" }
+						"sawedoff"	 { "kills"	"2" }
+						"ump45"	 { "kills"	"2" }
+						"xm1014"	 { "kills"	"2" }
+						"mp7"	 { "kills"	"2" }
+						"nova"	 { "kills"	"2" }
+						"nova"	 { "kills"	"2" }
+						"ssg08"	 { "kills"	"2" }
+						"deagle"	 { "kills"	"2" }
+						"elite"	 { "kills"	"2" }
+						"tec9"	 { "kills"	"2" }
+						"hkp2000"	 { "kills"	"2" }
+						"fiveseven"	 { "kills"	"2" }
+						"p250"	 { "kills"	"2" }
+						"glock"	 { "kills"	"2" }
+						"hegrenade"	 { "kills"	"2" }
+						"knifegg"	 { "kills"	"1" }
+          }
+        }
 			}
 		}
 	}
