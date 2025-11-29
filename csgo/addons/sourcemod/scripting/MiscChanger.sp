@@ -936,7 +936,7 @@ bool LoadCommandsFromKV(KeyValues kv, const char[] sSectionName, ConCmd fCommand
 	return true;
 }
 
-any[] GetPinByIndex(int index)
+Pin  GetPinByIndex(int index)
 {
 	Pin pin;
 	g_alPins.GetArray(index, pin, sizeof(pin));
@@ -944,7 +944,7 @@ any[] GetPinByIndex(int index)
 	return pin;
 }
 
-any[] GetCoinByIndex(int index)
+Coin GetCoinByIndex(int index)
 {
 	Coin coin;
 	g_alCoins.GetArray(index, coin, sizeof(coin));
