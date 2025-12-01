@@ -41,7 +41,7 @@
          *      1 - Enabled.
          *      0 - Disabled.
          */
-        "FastSwitchOnChangeWeapon" "1"
+        "FastSwitchOnChangeWeapon" "0"
 
         /**
          * Freeze players after win.
