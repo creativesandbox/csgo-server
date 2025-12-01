@@ -229,63 +229,23 @@
         "de_tuscan" {}
         "de_vertigo" {}
 
-		    "workshop/319808082/ar_deagle5_nuke"
-        {
-            "display"      "DM: ar_deagle5_nuke"
-        }
-        
-		    "workshop/221603249/de_marquis"
-        {
-            "display"      "DM: de_marquis"
-        }
-		    "workshop/150267492/de_chinatown"
-        {
-            "display"      "DM: de_chinatown"
-        }
-		    "workshop/174668691/cs_agency"
-        {
-            "display"      "DM: cs_agency"
-        }
-		    "workshop/126643563/ar_concrete"
-        {
-            "display"      "DM: ar_concrete"
-        }
-		    "workshop/122521875/fy_pool_day"
-        {
-            "display"      "DM: fy_pool_day"
-        }
-		    "workshop/135565371/fy_pool_day_classic"
-        {
-            "display"      "DM: fy_pool_day_classic"
-        }
-		    "workshop/182604249/de_overgrown"
-        {
-            "display"      "DM: de_overgrown"
-        }
-		    "workshop/526448928/de_killhouse"
-        {
-            "display"      "DM: de_killhouse"
-        }
-		    "workshop/835631624/fy_snow_rework_kp"
-        {
-            "display"      "DM: fy_snow_rework_kp"
-        }
-		    "workshop/882355656/de_dust2_css1"
-        {
-            "display"      "DM: de_dust2_css1"
-        }
-		    "workshop/258081127/fy_iceworld"
-        {
-            "display"      "DM: fy_iceworld"
-        }
-		    "workshop/1172581352/de_nuke_css1"
-        {
-            "display"      "DM: de_nuke_css1"
-        }
-		    "workshop/219295593/cs_rush"
-        {
-            "display"      "DM: cs_rush"
-        }
+		    "workshop/319808082/ar_deagle5_nuke"  {}
+		    "workshop/221603249/de_marquis" {}
+		    "workshop/150267492/de_chinatown" {}
+		    "workshop/174668691/cs_agency" {}
+		    "workshop/126643563/ar_concrete" {}
+		    "workshop/122521875/fy_pool_day" {}
+		    "workshop/135565371/fy_pool_day_classic" {}
+		    "workshop/182604249/de_overgrown" {}
+		    "workshop/526448928/de_killhouse" {}
+		    "workshop/835631624/fy_snow_rework_kp" {}
+		    "workshop/882355656/de_dust2_css1" {}
+		    "workshop/258081127/fy_iceworld" {}
+		    "workshop/1172581352/de_nuke_css1" {}
+		    "workshop/219295593/cs_rush" {}
+		    "workshop/268472808/aim_crazyjump_simpsons" {}
+		    "workshop/2487240600/nuketown_remake_2" {}
+		    "workshop/1485909129/de_drachenschanze_csgo" {}
     }
 
     "GunGame"
@@ -329,63 +289,23 @@
 
 		    
 
-		    "workshop/319808082/ar_deagle5_nuke"
-        {
-            "display"      "GunGame: ar_deagle5_nuke"
-        }
-        
-		    "workshop/221603249/de_marquis"
-        {
-            "display"      "GunGame: de_marquis"
-        }
-		    "workshop/150267492/de_chinatown"
-        {
-            "display"      "GunGame: de_chinatown"
-        }
-		    "workshop/174668691/cs_agency"
-        {
-            "display"      "GunGame: cs_agency"
-        }
-		    "workshop/126643563/ar_concrete"
-        {
-            "display"      "GunGame: ar_concrete"
-        }
-		    "workshop/122521875/fy_pool_day"
-        {
-            "display"      "GunGame: fy_pool_day"
-        }
-		    "workshop/135565371/fy_pool_day_classic"
-        {
-            "display"      "GunGame: fy_pool_day_classic"
-        }
-		    "workshop/182604249/de_overgrown"
-        {
-            "display"      "GunGame: de_overgrown"
-        }
-		    "workshop/526448928/de_killhouse"
-        {
-            "display"      "GunGame: de_killhouse"
-        }
-		    "workshop/835631624/fy_snow_rework_kp"
-        {
-            "display"      "GunGame: fy_snow_rework_kp"
-        }
-		    "workshop/882355656/de_dust2_css1"
-        {
-            "display"      "GunGame: de_dust2_css1"
-        }
-		    "workshop/258081127/fy_iceworld"
-        {
-            "display"      "GunGame: fy_iceworld"
-        }
-		    "workshop/1172581352/de_nuke_css1"
-        {
-            "display"      "GunGame: de_nuke_css1"
-        }
-		    "workshop/219295593/cs_rush"
-        {
-            "display"      "GunGame: cs_rush"
-        }
+		    "workshop/319808082/ar_deagle5_nuke"  {}
+		    "workshop/221603249/de_marquis" {}
+		    "workshop/150267492/de_chinatown" {}
+		    "workshop/174668691/cs_agency" {}
+		    "workshop/126643563/ar_concrete" {}
+		    "workshop/122521875/fy_pool_day" {}
+		    "workshop/135565371/fy_pool_day_classic" {}
+		    "workshop/182604249/de_overgrown" {}
+		    "workshop/526448928/de_killhouse" {}
+		    "workshop/835631624/fy_snow_rework_kp" {}
+		    "workshop/882355656/de_dust2_css1" {}
+		    "workshop/258081127/fy_iceworld" {}
+		    "workshop/1172581352/de_nuke_css1" {}
+		    "workshop/219295593/cs_rush" {}
+		    "workshop/268472808/aim_crazyjump_simpsons" {}
+		    "workshop/2487240600/nuketown_remake_2" {}
+		    "workshop/1485909129/de_drachenschanze_csgo" {}
     }
 
     "OneChamber"
@@ -427,66 +347,23 @@
         "de_tuscan" {}
         "de_vertigo" {}
 
-		    "workshop/319808082/ar_deagle5_nuke"
-        {
-            "display"      "One Chamber: ar_deagle5_nuke"
-        }
-		    "workshop/221603249/de_marquis"
-        {
-            "display"      "One Chamber: de_marquis"
-        }
-		    "workshop/150267492/de_chinatown"
-        {
-            "display"      "One Chamber: de_chinatown"
-        }
-		    "workshop/174668691/cs_agency"
-        {
-            "display"      "One Chamber: cs_agency"
-        }
-		    "workshop/127494596/The_Arena"
-        {
-            "display"      "One Chamber: The_Arena"
-        }
-		    "workshop/126643563/ar_concrete"
-        {
-            "display"      "One Chamber: ar_concrete"
-        }
-		    "workshop/122521875/fy_pool_day"
-        {
-            "display"      "One Chamber: fy_pool_day"
-        }
-		    "workshop/135565371/fy_pool_day_classic"
-        {
-            "display"      "One Chamber: fy_pool_day_classic"
-        }
-		    "workshop/182604249/de_overgrown"
-        {
-            "display"      "One Chamber: de_overgrown"
-        }
-		    "workshop/526448928/de_killhouse"
-        {
-            "display"      "One Chamber: de_killhouse"
-        }
-		    "workshop/835631624/fy_snow_rework_kp"
-        {
-            "display"      "One Chamber: fy_snow_rework_kp"
-        }
-		    "workshop/882355656/de_dust2_css1"
-        {
-            "display"      "One Chamber: de_dust2_css1"
-        }
-		    "workshop/258081127/fy_iceworld"
-        {
-            "display"      "One Chamber: fy_iceworld"
-        }
-		    "workshop/1172581352/de_nuke_css1"
-        {
-            "display"      "One Chamber: de_nuke_css1"
-        }
-		    "workshop/219295593/cs_rush"
-        {
-            "display"      "One Chamber: cs_rush"
-        }
+		    "workshop/319808082/ar_deagle5_nuke"  {}
+		    "workshop/221603249/de_marquis" {}
+		    "workshop/150267492/de_chinatown" {}
+		    "workshop/174668691/cs_agency" {}
+		    "workshop/126643563/ar_concrete" {}
+		    "workshop/122521875/fy_pool_day" {}
+		    "workshop/135565371/fy_pool_day_classic" {}
+		    "workshop/182604249/de_overgrown" {}
+		    "workshop/526448928/de_killhouse" {}
+		    "workshop/835631624/fy_snow_rework_kp" {}
+		    "workshop/882355656/de_dust2_css1" {}
+		    "workshop/258081127/fy_iceworld" {}
+		    "workshop/1172581352/de_nuke_css1" {}
+		    "workshop/219295593/cs_rush" {}
+		    "workshop/268472808/aim_crazyjump_simpsons" {}
+		    "workshop/2487240600/nuketown_remake_2" {}
+		    "workshop/1485909129/de_drachenschanze_csgo" {}
     }
 
     "AWP"
@@ -589,58 +466,22 @@
         "de_tuscan" {}
         "de_vertigo" {}
 
-		    "workshop/319808082/ar_deagle5_nuke"
-        {
-            "display"      "ArmsRace: ar_deagle5_nuke"
-        }
-
-		    "workshop/221603249/de_marquis"
-        {
-            "display"      "ArmsRace: de_marquis"
-        }
-		    "workshop/150267492/de_chinatown"
-        {
-            "display"      "ArmsRace: de_chinatown"
-        }
-		    "workshop/174668691/cs_agency"
-        {
-            "display"      "ArmsRace: cs_agency"
-        }
-		    "workshop/126643563/ar_concrete"
-        {
-            "display"      "ArmsRace: ar_concrete"
-        }
-		    "workshop/122521875/fy_pool_day"
-        {
-            "display"      "ArmsRace: fy_pool_day"
-        }
-		    "workshop/135565371/fy_pool_day_classic"
-        {
-            "display"      "ArmsRace: fy_pool_day_classic"
-        }
-		    "workshop/182604249/de_overgrown"
-        {
-            "display"      "ArmsRace: de_overgrown"
-        }
-		    "workshop/526448928/de_killhouse"
-        {
-            "display"      "ArmsRace: de_killhouse"
-        }
-		    "workshop/882355656/de_dust2_css1"
-        {
-            "display"      "ArmsRace: de_dust2_css1"
-        }
-		    "workshop/258081127/fy_iceworld"
-        {
-            "display"      "ArmsRace: fy_iceworld"
-        }
-		    "workshop/1172581352/de_nuke_css1"
-        {
-            "display"      "ArmsRace: de_nuke_css1"
-        }
-		    "workshop/219295593/cs_rush"
-        {
-            "display"      "ArmsRace: cs_rush"
-        }
+		    "workshop/319808082/ar_deagle5_nuke"  {}
+		    "workshop/221603249/de_marquis" {}
+		    "workshop/150267492/de_chinatown" {}
+		    "workshop/174668691/cs_agency" {}
+		    "workshop/126643563/ar_concrete" {}
+		    "workshop/122521875/fy_pool_day" {}
+		    "workshop/135565371/fy_pool_day_classic" {}
+		    "workshop/182604249/de_overgrown" {}
+		    "workshop/526448928/de_killhouse" {}
+		    "workshop/835631624/fy_snow_rework_kp" {}
+		    "workshop/882355656/de_dust2_css1" {}
+		    "workshop/258081127/fy_iceworld" {}
+		    "workshop/1172581352/de_nuke_css1" {}
+		    "workshop/219295593/cs_rush" {}
+		    "workshop/268472808/aim_crazyjump_simpsons" {}
+		    "workshop/2487240600/nuketown_remake_2" {}
+		    "workshop/1485909129/de_drachenschanze_csgo" {}
     }
 }
