@@ -1,90 +1,91 @@
-public void ParseItems()
+public Action Timer_ParseItems(Handle timer)
 {
-    char szFileToDownload[24];
-    if(StrEqual(g_szLanguageCode, "en", false))
-    {
-        Format(szFileToDownload, sizeof(szFileToDownload), "items.json");
-    }
-    else
-    {
-       Format(szFileToDownload, sizeof(szFileToDownload), "items_%s.json", g_szLanguageCode);
-    }
-
-    PrintToServer("%s Downloading eItems data from API", TAG_NCLR);
-    HTTPClient httpClient = new HTTPClient("https://api.hexa-core.eu/plugins/eitems");
-    httpClient.SetHeader("User-Agent", "eItems HTTP Client 1.0 (730)");
-    httpClient.Get(szFileToDownload, PraseItemsDownloaded);
+    ParseItems();
+    return Plugin_Continue;
 }
 
-public void PraseItemsDownloaded(HTTPResponse response, any value)
+public void ParseItems()
+{
+
+    char szFileToDownload[128];
+    Format(szFileToDownload, sizeof szFileToDownload, "items_%s.json", g_szLanguageCode);
+
+    if (g_bUseLocal)
+    {
+        PrintToServer("%s Using local file as a source. Language: '%s'", TAG_NCLR, g_szLanguageCode);
+
+        char szLocalFilePath[PLATFORM_MAX_PATH];
+        BuildPath(Path_SM, szLocalFilePath, sizeof szLocalFilePath, "data/%s", szFileToDownload);
+
+        if (!FileExists(szLocalFilePath))
+        {
+            SetFailState("%s Unable to find: %s", TAG_NCLR, szLocalFilePath);
+            return;
+        }
+
+        JSONObject jData = JSONObject.FromFile(szLocalFilePath);
+        ParseData(view_as<JSON>(jData));
+        return;
+    }
+
+    PrintToServer("%s Downloading eItems data from GitHub", TAG_NCLR);
+
+    char szURL[512];
+    Format(szURL, sizeof(szURL), "https://raw.githubusercontent.com/ESK0/eItems/main/data//%s", szFileToDownload);
+
+    httpRequest = new HTTPRequest(szURL);
+    httpRequest.Get(ParseItemsDownloaded);
+}
+
+
+public Action Timer_AttemptDownload(Handle timer)
+{
+    ParseItems();
+    return Plugin_Continue;
+}
+public void ParseItemsDownloaded(HTTPResponse response, any value)
 {
     if (response.Status != HTTPStatus_OK)
     {
-        PrintToServer("%s Downloading eItems data from API failed! Local backup will be used instead!", TAG_NCLR);
-        LoadBackup();
+        if(g_iAPIDownloadAttempt <= 5)
+        {
+            g_iAPIDownloadAttempt++;
+            PrintToServer("%s Downloading eItems data from GitHub failed! Attempt: %i/5, Trying again in 2 seconds", TAG_NCLR, g_iAPIDownloadAttempt);
+            CreateTimer(2.0, Timer_AttemptDownload, TIMER_FLAG_NO_MAPCHANGE); 
+        }
+        else
+        {
+            PrintToServer("%s Downloading eItems data from GitHub failed!", TAG_NCLR);
+        }
         return;
     }
     if (response.Data == null)
     {
-        PrintToServer("%s Downloading eItems data from API failed! Local backup will be used instead!", TAG_NCLR);
-        LoadBackup();
+        PrintToServer("%s Downloading eItems data from GitHub failed!", TAG_NCLR);
         return;
     }
     PrintToServer("%s eItems data for '%s' language downloaded successfully", TAG_NCLR, g_szLanguageCode);
-    LoadBackup();
+    ParseData(response.Data);
 }
 
-public void LoadBackup()
+public void ParseData(JSON json)
 {
-    if(!FileExists(g_szLocalFilePath))
-    {
-        SetFailState("%s Local backup not found! Turning plugin off.", TAG_NCLR);
-        return;
-    }
-
-    JSONObject jRoot = JSONObject.FromFile(g_szLocalFilePath);
-    ParseData(jRoot);
-}
-
-public void BackupJson(JSON json)
-{
-    PrintToServer("%s Creating local backup file!", TAG_NCLR);
-    File fLocalFile = null;
-    if (fLocalFile == null)
-    {
-        if(FileExists(g_szLocalFilePath))
-        {
-            DeleteFile(g_szLocalFilePath);
-        }
-        fLocalFile = OpenFile(g_szLocalFilePath, "w+");
-    }
-
     JSONObject jRoot = view_as<JSONObject>(json);
 
-    jRoot.ToFile(g_szLocalFilePath, JSON_COMPACT);
-    delete fLocalFile;
-    fLocalFile = null;
-    PrintToServer("%s Backup created!", TAG_NCLR);
-
-    ParseData(jRoot);
-}
-
-public void ParseData(JSONObject jRoot)
-{
     g_bItemsSyncing = true;
     g_fStart = GetEngineTime();
 
-    JSONArray   jWeapons        = view_as<JSONArray>(jRoot.Get("weapons"));
     JSONArray   jPaints         = view_as<JSONArray>(jRoot.Get("paints"));
+    JSONArray   jWeapons        = view_as<JSONArray>(jRoot.Get("weapons"));
     JSONArray   jGloves         = view_as<JSONArray>(jRoot.Get("gloves"));
-    JSONObject  jCoins          = view_as<JSONObject>(jRoot.Get("coins"));
-    JSONArray   jPins           = view_as<JSONArray>(jRoot.Get("pins"));
-    JSONArray   jCrates         = view_as<JSONArray>(jRoot.Get("crates"));
     JSONArray   jMusicKits      = view_as<JSONArray>(jRoot.Get("music_kits"));
-    JSONArray   jPatches        = view_as<JSONArray>(jRoot.Get("patches"));
-    JSONArray   jSprayes        = view_as<JSONArray>(jRoot.Get("sprayes"));
+    JSONArray   jPins           = view_as<JSONArray>(jRoot.Get("pins"));
+    JSONObject  jCoins          = view_as<JSONObject>(jRoot.Get("coins"));
     JSONObject  jStickers       = view_as<JSONObject>(jRoot.Get("stickers"));
-    
+    JSONArray   jAgents         = view_as<JSONArray>(jRoot.Get("agents"));
+    JSONArray   jPatches        = view_as<JSONArray>(jRoot.Get("patches"));
+    JSONArray   jCrates         = view_as<JSONArray>(jRoot.Get("crates"));
+    JSONObject   jSprays         = view_as<JSONObject>(jRoot.Get("sprays"));
 
     /*              Paints parse                */
 
@@ -114,6 +115,23 @@ public void ParseData(JSONObject jRoot)
 
     ParseStickers(jStickers);
 
+    /*              Agents parse                  */
+
+    ParseAgents(jAgents);
+
+    /*              Patches parse                  */
+
+    ParsePatches(jPatches);
+
+    /*              Crates parse                  */
+
+    ParseCrates(jCrates);
+
+    /*             Sprays parse                  */
+
+    ParseSprays(jSprays);
+    
+
     delete jRoot;
     delete jWeapons;
     delete jPaints;
@@ -123,16 +141,27 @@ public void ParseData(JSONObject jRoot)
     delete jCrates;
     delete jMusicKits;
     delete jPatches;
-    delete jSprayes;
+    delete jSprays;
     delete jStickers;
+    delete jAgents;
+
     float fEnd = GetEngineTime();
     PrintToServer("%s Items synced successfully in %0.5f seconds", TAG_NCLR, fEnd - g_fStart);
     g_bItemsSynced = true;
     g_bItemsSyncing = false;
 
     Call_StartForward(g_OnItemsSynced);
-    Call_Finish(g_OnItemsSynced);
+    Call_Finish();
+
     CheckHibernation(true);
+    AddSpraysToDownloadsTable();
+    //CreateTimer(60.0, Timer_ParseFinished, _, TIMER_FLAG_NO_MAPCHANGE);
+}
+
+public Action Timer_ParseFinished(Handle timer)
+{
+    CheckHibernation(true);
+    return Plugin_Continue;
 }
 
 public void ParseWeapons(JSONArray array)
@@ -327,9 +356,21 @@ public void ParsePaints(JSONArray array)
     char szDisplayName[64];
     char szDisplayNameExtra[32];
     char szSkinDef[12];
+    char szRarityName[48];
+    char szWearRemapMin[12];
+    char szWearRemapMax[12];
+
     for(int iSkinNum = 0; iSkinNum < array.Length; iSkinNum++)
     {
         jItem = view_as<JSONObject>(array.Get(iSkinNum));
+
+        JSONObject jRarity = view_as<JSONObject>(jItem.Get("rarity"));
+
+        jRarity.GetString("name", szRarityName, sizeof(szRarityName));
+        
+        JSONObject jWearRemap = view_as<JSONObject>(jItem.Get("wear_remap"));
+        jWearRemap.GetString("min", szWearRemapMin, sizeof(szWearRemapMin));
+        jWearRemap.GetString("max", szWearRemapMax, sizeof(szWearRemapMax));
 
         iDefIndex = jItem.GetInt("def_index");
         g_arSkinsNum.Push(iDefIndex);
@@ -346,11 +387,17 @@ public void ParsePaints(JSONArray array)
 
         eSkinInfo SkinInfo;
         SkinInfo.SkinNum = iSkinNum;
+        SkinInfo.SkinRarity = jRarity.GetInt("id");
         strcopy(SkinInfo.DisplayName, sizeof(eSkinInfo::DisplayName), szDisplayName);
+        strcopy(SkinInfo.RarityName, sizeof(eSkinInfo::RarityName), szRarityName);
         SkinInfo.GloveApplicable = false;
+        SkinInfo.WearRemap.Min = StringToFloat(szWearRemapMin);
+        SkinInfo.WearRemap.Max = StringToFloat(szWearRemapMax);
         g_smSkinInfo.SetArray(szSkinDef, SkinInfo, sizeof(eSkinInfo));
 
         delete jItem;
+        delete jRarity;
+        delete jWearRemap;
     }
     PrintToServer("%s %i paints synced successfully!", TAG_NCLR, array.Length);
 }
@@ -423,7 +470,7 @@ public void ParseMusicKits(JSONArray array)
     JSONObject jItem;
 
     int iDefIndex = 0;
-    char szDisplayName[48];
+    char szDisplayName[64];
     char szMusicKitDefIndex[12];
 
     for(int iMusicKitNum = 0; iMusicKitNum < array.Length; iMusicKitNum++)
@@ -454,7 +501,7 @@ public void ParsePins(JSONArray array)
     JSONObject jItem;
 
     int iDefIndex = 0;
-    char szDisplayName[48];
+    char szDisplayName[64];
     char szPinKitDefIndex[12];
 
     for(int iPinNum = 0; iPinNum < array.Length; iPinNum++)
@@ -487,7 +534,7 @@ public void ParseCoins(JSONObject array)
     g_iCoinsCount = jCoins.Length;
 
     int iID;
-    char szDisplayName[48];
+    char szDisplayName[64];
     char szCoinIndex[12];
     char szCoinSetIndex[12];
     for(int iCoinSet = 0; iCoinSet < g_iCoinsSetsCount; iCoinSet++)
@@ -555,7 +602,7 @@ public void ParseStickers(JSONObject array)
     g_iStickersCount = jStickers.Length;
 
     int iID;
-    char szDisplayName[48];
+    char szDisplayName[64];
     char szStickerIndex[12];
     char szStickerSetIndex[12];
     for(int iStickerSet = 0; iStickerSet < g_iStickersSetsCount; iStickerSet++)
@@ -572,7 +619,7 @@ public void ParseStickers(JSONObject array)
         for(int iItems = 0; iItems < jItems.Size; iItems++)
         {
             IntToString(iItems, szStickerIndex, sizeof(szStickerIndex));
-
+            
             int iStickerDefIndex = jItems.GetInt(szStickerIndex);
             arStickers.Push(iStickerDefIndex);
         }
@@ -605,6 +652,24 @@ public void ParseStickers(JSONObject array)
         StickerInfo.StickerNum = iStickerNum;
         strcopy(StickerInfo.DisplayName, sizeof(eStickerInfo::DisplayName), szDisplayName);
         g_smStickersInfo.SetArray(szStickerIndex, StickerInfo, sizeof(eStickerInfo));
+
+        for(int x = 0; x < g_iStickersSetsCount; x++)
+        {
+            int iStickerSetId = GetStickerSetIdByStickerSetNum(x);
+            char szStickerSetId[12];
+            IntToString(iStickerSetId, szStickerSetId, sizeof(szStickerSetId));
+
+            eStickersSets StickersSets;
+            g_smStickersSets.GetArray(szStickerSetId, StickersSets, sizeof(eStickersSets));
+
+            ArrayList arStickers = StickersSets.Stickers;
+            int iFound;
+            if((iFound = arStickers.FindValue(iID) != -1) >= 0)
+            {
+                g_bIsStickerInSet[x][iStickerNum] = view_as<bool>(iFound);
+            }
+        }
+
         delete jSticker;
     }
 
@@ -612,4 +677,223 @@ public void ParseStickers(JSONObject array)
     delete jStickers;
 
     PrintToServer("%s %i stickers (in %i sets) synced successfully!", TAG_NCLR, g_iStickersCount, g_iStickersSetsCount);
+}
+
+public void ParseAgents(JSONArray array)
+{
+    g_iAgentsCount = array.Length;
+    JSONObject jItem;
+
+    int iDefIndex = 0;
+    int iTeam = 0;
+    char szDisplayName[64];
+    char szPlayerModel[PLATFORM_MAX_PATH];
+    char szAgentDefIndex[12];
+    char szVOPrefix[64];
+
+    for(int iAgentNum = 0; iAgentNum < array.Length; iAgentNum++)
+    {
+        jItem = view_as<JSONObject>(array.Get(iAgentNum));
+        iDefIndex = jItem.GetInt("def_index");
+        iTeam = jItem.GetInt("team");
+        g_arAgentsNum.Push(iDefIndex);
+        jItem.GetString("item_name", szDisplayName, sizeof(szDisplayName));
+        jItem.GetString("player_model", szPlayerModel, sizeof(szPlayerModel));
+
+        if (jItem.HasKey("vo_prefix"))
+        {
+            jItem.GetString("vo_prefix", szVOPrefix, sizeof(szVOPrefix));
+        }
+        else
+        {
+            szVOPrefix = "";
+        }
+
+        IntToString(iDefIndex, szAgentDefIndex, sizeof(szAgentDefIndex));
+
+        eAgentInfo AgentInfo;
+        AgentInfo.AgentNum = iAgentNum;
+        AgentInfo.Team = iTeam;
+
+        strcopy(AgentInfo.DisplayName, sizeof(eAgentInfo::DisplayName), szDisplayName);
+        strcopy(AgentInfo.PlayerModel, sizeof(eAgentInfo::PlayerModel), szPlayerModel);
+        strcopy(AgentInfo.VOPrefix, sizeof(eAgentInfo::VOPrefix), szVOPrefix);
+
+        g_smAgentsInfo.SetArray(szAgentDefIndex, AgentInfo, sizeof(eAgentInfo));
+
+        delete jItem;
+    }
+    PrintToServer("%s %i agents synced successfully!", TAG_NCLR, array.Length);
+}
+
+public void ParsePatches(JSONArray array)
+{
+    g_iPatchesCount = array.Length;
+    JSONObject jItem;
+
+    int iDefIndex = 0;
+    char szDisplayName[64];
+    char szPatchDefIndex[12];
+
+    for(int iPatchNum = 0; iPatchNum < array.Length; iPatchNum++)
+    {
+        jItem = view_as<JSONObject>(array.Get(iPatchNum));
+        iDefIndex = jItem.GetInt("def_index");
+        g_arPatchesNum.Push(iDefIndex);
+        jItem.GetString("item_name", szDisplayName, sizeof(szDisplayName));
+
+        IntToString(iDefIndex, szPatchDefIndex, sizeof(szPatchDefIndex));
+
+        ePatchInfo PatchInfo;
+        PatchInfo.PatchNum = iPatchNum;
+
+        strcopy(PatchInfo.DisplayName, sizeof(ePatchInfo::DisplayName), szDisplayName);
+        g_smPatchesInfo.SetArray(szPatchDefIndex, PatchInfo, sizeof(ePatchInfo));
+
+        delete jItem;
+    }
+    PrintToServer("%s %i patches synced successfully!", TAG_NCLR, array.Length);
+}
+
+public void ParseCrates(JSONArray array)
+{
+    g_iCratesCount = array.Length;
+    JSONObject jItem;
+
+    int iDefIndex = 0;
+    char szDisplayName[64];
+    char szCrateDefIndex[12];
+    char szWorldModel[PLATFORM_MAX_PATH];
+
+    for(int iCrateNum = 0; iCrateNum < array.Length; iCrateNum++)
+    {
+        jItem = view_as<JSONObject>(array.Get(iCrateNum));
+        iDefIndex = jItem.GetInt("def_index");
+        g_arCratesNum.Push(iDefIndex);
+        jItem.GetString("item_name", szDisplayName, sizeof(szDisplayName));
+        jItem.GetString("view_model", szWorldModel, sizeof(szWorldModel));
+        IntToString(iDefIndex, szCrateDefIndex, sizeof(szCrateDefIndex));
+
+        JSONArray jItems = view_as<JSONArray>(jItem.Get("items"));
+
+        ArrayList arCrateItems = new ArrayList(sizeof(eItems_CrateItem));
+        for(int iItemNum = 0; iItemNum < jItems.Length; iItemNum++)
+        {
+            JSONObject jCrateItem = view_as<JSONObject>(jItems.Get(iItemNum));
+            int iWeaponDefIndex = jCrateItem.GetInt("weapon_def_index");
+            int iSkinDefIndex = jCrateItem.GetInt("paint_def_index");
+
+            eItems_CrateItem CrateItem;
+            CrateItem.WeaponDefIndex = iWeaponDefIndex;
+            CrateItem.SkinDefIndex = iSkinDefIndex;
+
+            arCrateItems.PushArray(CrateItem);
+            delete jCrateItem;
+        }
+
+        eCrateInfo CrateInfo;
+        CrateInfo.CrateNum = iCrateNum;
+        CrateInfo.ItemsCount = jItems.Length;
+        CrateInfo.Items = arCrateItems;
+
+        strcopy(CrateInfo.DisplayName, sizeof(eCrateInfo::DisplayName), szDisplayName);
+        strcopy(CrateInfo.WorldModel, sizeof(eCrateInfo::WorldModel), szWorldModel);
+        g_smCratesInfo.SetArray(szCrateDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+        delete jItems;
+        delete jItem;
+    }
+    PrintToServer("%s %i crates synced successfully!", TAG_NCLR, array.Length);
+}
+
+public void ParseSprays(JSONObject array)
+{
+    JSONArray jCategories   = view_as<JSONArray>(array.Get("categories"));
+    JSONArray jSprays    = view_as<JSONArray>(array.Get("items"));
+
+    g_iSpraysSetsCount = jCategories.Length;
+    g_iSpraysCount = jSprays.Length;
+
+    int iID;
+    int iDefIndex = 0;
+    char szDisplayName[64];
+    char szSprayIndex[12];
+    char szSpraySetIndex[12];
+    char szMaterialPath[PLATFORM_MAX_PATH];
+    char szSprayDefIndex[12];
+    for(int iSpraySet = 0; iSpraySet < g_iSpraysSetsCount; iSpraySet++)
+    {
+        JSONObject jSet = view_as<JSONObject>(jCategories.Get(iSpraySet));
+
+        iID = jSet.GetInt("id");
+        jSet.GetString("name", szDisplayName, sizeof(szDisplayName));
+        IntToString(iID, szSpraySetIndex, sizeof(szSpraySetIndex));
+        JSONObject jItems = view_as<JSONObject>(jSet.Get("items"));
+
+        ArrayList arSprays = new ArrayList();
+
+        for(int iItems = 0; iItems < jItems.Size; iItems++)
+        {
+            IntToString(iItems, szSprayIndex, sizeof(szSprayIndex));
+            
+            int iSprayDefIndex = jItems.GetInt(szSprayIndex);
+            arSprays.Push(iSprayDefIndex);
+        }
+
+        g_arSpraysSetsNum.Push(iID);
+
+        eSpraysSets SpraysSets;
+        SpraysSets.SpraySetNum = iSpraySet;
+        strcopy(SpraysSets.DisplayName, sizeof(eSpraysSets::DisplayName), szDisplayName);
+        SpraysSets.Sprays = arSprays;
+
+        g_smSpraysSets.SetArray(szSpraySetIndex, SpraysSets, sizeof(eSpraysSets));
+        
+        delete jItems;
+        delete jSet;
+    }
+
+    for(int iSprayNum = 0; iSprayNum < g_iSpraysCount; iSprayNum++)
+    {   
+        JSONObject jSpray = view_as<JSONObject>(jSprays.Get(iSprayNum));
+        iDefIndex = jSpray.GetInt("def_index");
+        g_arSpraysNum.Push(iDefIndex);
+        jSpray.GetString("item_name", szDisplayName, sizeof(szDisplayName));
+        jSpray.GetString("material", szMaterialPath, sizeof(szMaterialPath));
+
+        Format(szMaterialPath, sizeof(szMaterialPath), "decals/eitems/sprays/%s", szMaterialPath);
+
+        IntToString(iDefIndex, szSprayDefIndex, sizeof(szSprayDefIndex));
+
+        eSprayInfo SprayInfo;
+        SprayInfo.SprayNum = iSprayNum;
+
+        strcopy(SprayInfo.DisplayName, sizeof(eSprayInfo::DisplayName), szDisplayName);
+        strcopy(SprayInfo.MaterialPath, sizeof(eSprayInfo::MaterialPath), szMaterialPath);
+
+        g_smSpraysInfo.SetArray(szSprayDefIndex, SprayInfo, sizeof(eSprayInfo));
+
+        for(int x = 0; x < g_iSpraysSetsCount; x++)
+        {
+            int iSpraySetId = GetSpraySetIdBySpraySetNum(x);
+            char szSpraySetId[12];
+            IntToString(iSpraySetId, szSpraySetId, sizeof(szSpraySetId));
+
+            eSpraysSets SpraysSets;
+            g_smSpraysSets.GetArray(szSpraySetId, SpraysSets, sizeof(eSpraysSets));
+
+            ArrayList arSprays = SpraysSets.Sprays;
+            int iFound;
+            if((iFound = arSprays.FindValue(iDefIndex) != -1) >= 0)
+            {
+                g_bIsSprayInSet[x][iSprayNum] = view_as<bool>(iFound);
+            }
+        }
+
+        delete jSpray;
+    }
+
+    delete jCategories;
+    delete jSprays;
+    PrintToServer("%s %i sprays (in %i sets) synced successfully!", TAG_NCLR, g_iSpraysCount, g_iSpraysSetsCount);
 }

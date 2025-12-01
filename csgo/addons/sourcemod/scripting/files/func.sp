@@ -43,6 +43,31 @@ public int GetStickersSetsCount()
     return g_iStickersSetsCount;
 }
 
+public int GetAgentsCount()
+{
+    return g_iAgentsCount;
+}
+
+public int GetPatchesCount()
+{
+    return g_iPatchesCount;
+}
+
+public int GetCratesCount()
+{
+    return g_iCratesCount;
+}
+
+public int GetSpraysCount()
+{
+    return g_iSpraysCount;
+}
+
+public int GetSpraysSetsCount()
+{
+    return g_iSpraysSetsCount;
+}
+
 public bool AreItemsSynced()
 {
     return g_bItemsSynced;
@@ -62,7 +87,7 @@ public bool IsDefIndexKnife(int iDefIndex)
     }
 
     char szDefIndex[12];
-    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+    IntToString(iDefIndex, szDefIndex, sizeof szDefIndex);
 
     eWeaponInfo WeaponInfo;
     g_smWeaponInfo.GetArray(szDefIndex, WeaponInfo, sizeof(eWeaponInfo));
@@ -83,6 +108,27 @@ public int GetActiveWeapon(int client)
     }
 
     return GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+}
+
+public int GetInSlotWeapon(int client, int iSlot)
+{
+    int iMyWeapons = GetEntPropArraySize(client, Prop_Send, "m_hMyWeapons");
+
+    for (int i = 0; i < iMyWeapons; i++)
+    {
+        int iWeapon = GetEntPropEnt(client, Prop_Send, "m_hMyWeapons", i);
+
+        if(!IsValidWeapon(iWeapon))
+        {
+            continue;
+        }
+
+        if(GetWeaponSlotByWeapon(iWeapon) == iSlot)
+        {
+            return iWeapon;
+        }
+    }
+    return -1;
 }
 
 public int GetActiveWeaponDefIndex(int client)
@@ -106,7 +152,7 @@ public int FindWeaponByWeaponNum(int client, int iWeaponNum)
 
     char szClassName[48];
 
-    if (!GetWeaponClassNameByWeaponNum(iWeaponNum, szClassName, sizeof(szClassName)))
+    if (!GetWeaponClassNameByWeaponNum(iWeaponNum, szClassName, sizeof szClassName))
     {
         return -1;
     }
@@ -158,7 +204,7 @@ public bool IsSkinnableDefIndex(int iDefIndex)
     }
 
     char szDefIndex[12];
-    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+    IntToString(iDefIndex, szDefIndex, sizeof szDefIndex);
 
     ArrayList arWeaponPaints = null;
     g_smWeaponPaints.GetValue(szDefIndex, arWeaponPaints);
@@ -178,7 +224,7 @@ public int FindWeaponByDefIndex(int client, int iDefIndex)
 
     char szClassName[48];
 
-    if (!GetWeaponClassNameByDefIndex(iDefIndex, szClassName, sizeof(szClassName)))
+    if (!GetWeaponClassNameByDefIndex(iDefIndex, szClassName, sizeof szClassName))
     {
         return -1;
     }
@@ -197,7 +243,7 @@ public int GetWeaponNumByClassName(const char[] szClassName)
     for(int iWeaponNum = 0; iWeaponNum < g_iWeaponCount; iWeaponNum++)
     {
         int iDefIndex = g_arWeaponsNum.Get(iWeaponNum);
-        IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+        IntToString(iDefIndex, szDefIndex, sizeof szDefIndex);
         eWeaponInfo WeaponInfo;
         g_smWeaponInfo.GetArray(szDefIndex, WeaponInfo, sizeof(eWeaponInfo));
         if(strcmp(szClassName, WeaponInfo.ClassName, false) == 0)
@@ -217,7 +263,7 @@ public int GetWeaponNumByWeapon(int iWeapon)
     }
 
     char szDefIndex[12];
-    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+    IntToString(iDefIndex, szDefIndex, sizeof szDefIndex);
 
     eWeaponInfo WeaponInfo;
     g_smWeaponInfo.GetArray(szDefIndex, WeaponInfo, sizeof(eWeaponInfo));
@@ -2319,6 +2365,56 @@ public bool IsNativeSkinByDefIndex(int iSkinDefIndex, int iItemDefIndex, int iIt
     }
     return false;
 }
+
+public int GetSkinRarity(int iDefIndex)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eSkinInfo SkinInfo;
+    g_smSkinInfo.GetArray(szDefIndex, SkinInfo, sizeof(eSkinInfo));
+
+    return SkinInfo.SkinRarity;
+}
+
+public bool GetSkinRarityName(int iDefIndex, char[] szDisplayName, int iLen)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eSkinInfo SkinInfo;
+    g_smSkinInfo.GetArray(szDefIndex, SkinInfo, sizeof(eSkinInfo));
+
+    strcopy(szDisplayName, iLen, SkinInfo.RarityName);
+    return true;
+}
+
+public float GetSkinWearRemapByDefIndex(int iDefIndex, WearRemap remap)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eSkinInfo SkinInfo;
+    g_smSkinInfo.GetArray(szDefIndex, SkinInfo, sizeof(eSkinInfo));
+
+    float fRevmap = remap == Min ? SkinInfo.WearRemap.Min : SkinInfo.WearRemap.Max;
+    return fRevmap;
+}
+
+public float GetSkinWearRemapBySkinNum(int iSkinNum, WearRemap remap)
+{
+    int iDefIndex = GetSkinDefIndexBySkinNum(iSkinNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eSkinInfo SkinInfo;
+    g_smSkinInfo.GetArray(szDefIndex, SkinInfo, sizeof(eSkinInfo));
+
+    float fRevmap = remap == Min ? SkinInfo.WearRemap.Min : SkinInfo.WearRemap.Max;
+    return fRevmap;
+}
+
     /*      Gloves      */
 
 public int GetGlovesNumByDefIndex(int iDefIndex)
@@ -2774,16 +2870,516 @@ public bool GetStickerDisplayNameByDefIndex(int iDefIndex, char[] szDisplayName,
     return true;
 }
 
-public bool IsStickerInSet(int iStickerNum, int iStickerSetId)
+public bool IsStickerInSet(int iStickerSetNum, int iStickerNum)
 {
-    int iStickerDefIndex = GetStickerDefIndexByStickerNum(iStickerNum);
+    if(iStickerSetNum < 0 || iStickerSetNum > g_iStickersSetsCount)
+    {
+        return false;
+    }
 
-    char szStickerSetId[12];
-    IntToString(iStickerSetId, szStickerSetId, sizeof(szStickerSetId));
-    
-    eStickersSets StickersSets;
-    g_smStickersSets.GetArray(szStickerSetId, StickersSets, sizeof(eStickersSets));
+    if(iStickerNum < 0 || iStickerNum > g_iStickersCount)
+    {
+        return false;
+    }
 
-    ArrayList arStickers = StickersSets.Stickers;
-    return arStickers.FindValue(iStickerDefIndex) != -1;
+    return g_bIsStickerInSet[iStickerSetNum][iStickerNum];
+}
+
+    /*      Agents      */
+
+
+
+public int GetAgentNumByDefIndex(int iDefIndex)
+{
+    int iIndex = g_arAgentsNum.FindValue(iDefIndex);
+    if(iIndex == -1)
+    {
+        return -1;
+    }
+
+    return iIndex;
+}
+
+public int GetAgentDefIndexByAgentNum(int iAgentNum)
+{
+    if(g_arAgentsNum.Length < iAgentNum)
+    {
+        return -1;
+    }
+
+    return g_arAgentsNum.Get(iAgentNum);
+}
+
+public bool GetAgentDisplayNameByDefIndex(int iDefIndex, char[] szDisplayName, int iLen)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eAgentInfo AgentInfo;
+    g_smAgentsInfo.GetArray(szDefIndex, AgentInfo, sizeof(eAgentInfo));
+
+    strcopy(szDisplayName, iLen, AgentInfo.DisplayName);
+    return true;
+}
+
+public bool GetAgentDisplayNameByAgentNum(int iAgentNum, char[] szDisplayName, int iLen)
+{
+    int iDefIndex = GetAgentDefIndexByAgentNum(iAgentNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eAgentInfo AgentInfo;
+    g_smAgentsInfo.GetArray(szDefIndex, AgentInfo, sizeof(eAgentInfo));
+
+    strcopy(szDisplayName, iLen, AgentInfo.DisplayName);
+    return true;
+}
+
+public bool GetAgentPlayerModelByDefIndex(int iDefIndex, char[] szPlayerModel, int iLen)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eAgentInfo AgentInfo;
+    g_smAgentsInfo.GetArray(szDefIndex, AgentInfo, sizeof(eAgentInfo));
+
+    strcopy(szPlayerModel, iLen, AgentInfo.PlayerModel);
+    return true;
+}
+
+public bool GetAgentPlayerModelByAgentNum(int iAgentNum, char[] szPlayerModel, int iLen)
+{
+    int iDefIndex = GetAgentDefIndexByAgentNum(iAgentNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eAgentInfo AgentInfo;
+    g_smAgentsInfo.GetArray(szDefIndex, AgentInfo, sizeof(eAgentInfo));
+
+    strcopy(szPlayerModel, iLen, AgentInfo.PlayerModel);
+    return true;
+}
+
+
+public int GetAgentTeamByDefIndex(int iDefIndex)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eAgentInfo AgentInfo;
+    g_smAgentsInfo.GetArray(szDefIndex, AgentInfo, sizeof(eAgentInfo));
+
+    return AgentInfo.Team;
+}
+
+public int GetAgentTeamByAgentNum(int iAgentNum)
+{
+    int iDefIndex = GetAgentDefIndexByAgentNum(iAgentNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eAgentInfo AgentInfo;
+    g_smAgentsInfo.GetArray(szDefIndex, AgentInfo, sizeof(eAgentInfo));
+
+    return AgentInfo.Team;
+}
+
+public bool GetAgentVOPrefixByDefIndex(int iDefIndex, char[] szVOPrefix, int iLen)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eAgentInfo AgentInfo;
+    g_smAgentsInfo.GetArray(szDefIndex, AgentInfo, sizeof(eAgentInfo));
+
+    strcopy(szVOPrefix, iLen, AgentInfo.VOPrefix);
+    return true;
+}
+
+public bool GetAgentVOPrefixByAgentNum(int iAgentNum, char[] szVOPrefix, int iLen)
+{
+    int iDefIndex = GetAgentDefIndexByAgentNum(iAgentNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eAgentInfo AgentInfo;
+    g_smAgentsInfo.GetArray(szDefIndex, AgentInfo, sizeof(eAgentInfo));
+
+    strcopy(szVOPrefix, iLen, AgentInfo.VOPrefix);
+    return true;
+}
+
+    /*      Patches      */
+
+public int GetPatchNumByDefIndex(int iDefIndex)
+{
+    int iIndex = g_arPatchesNum.FindValue(iDefIndex);
+    if(iIndex == -1)
+    {
+        return -1;
+    }
+
+    return iIndex;
+}
+
+public int GetPatchDefIndexByPatchNum(int iPatchNum)
+{
+    if(g_arPatchesNum.Length < iPatchNum)
+    {
+        return -1;
+    }
+
+    return g_arPatchesNum.Get(iPatchNum);
+}
+
+public bool GetPatchDisplayNameByDefIndex(int iDefIndex, char[] szDisplayName, int iLen)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    ePatchInfo PatchInfo;
+    g_smPatchesInfo.GetArray(szDefIndex, PatchInfo, sizeof(ePatchInfo));
+
+    strcopy(szDisplayName, iLen, PatchInfo.DisplayName);
+    return true;
+}
+
+public bool GetPatchDisplayNameByPatchNum(int iPatchNum, char[] szDisplayName, int iLen)
+{
+    int iDefIndex = GetPatchDefIndexByPatchNum(iPatchNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    ePatchInfo PatchInfo;
+    g_smPatchesInfo.GetArray(szDefIndex, PatchInfo, sizeof(ePatchInfo));
+
+    strcopy(szDisplayName, iLen, PatchInfo.DisplayName);
+    return true;
+}
+
+    /*      Crates      */
+
+public int GetCrateNumByDefIndex(int iDefIndex)
+{
+    int iIndex = g_arCratesNum.FindValue(iDefIndex);
+    if(iIndex == -1)
+    {
+        return -1;
+    }
+
+    return iIndex;
+}
+
+public int GetCrateDefIndexByCrateNum(int iCrateNum)
+{
+    if(g_arCratesNum.Length < iCrateNum)
+    {
+        return -1;
+    }
+
+    return g_arCratesNum.Get(iCrateNum);
+}
+
+public bool GetCrateDisplayNameByDefIndex(int iDefIndex, char[] szDisplayName, int iLen)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eCrateInfo CrateInfo;
+    g_smCratesInfo.GetArray(szDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+    strcopy(szDisplayName, iLen, CrateInfo.DisplayName);
+    return true;
+}
+
+public bool GetCrateDisplayNameByCrateNum(int iCrateNum, char[] szDisplayName, int iLen)
+{
+    int iDefIndex = GetCrateDefIndexByCrateNum(iCrateNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eCrateInfo CrateInfo;
+    g_smCratesInfo.GetArray(szDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+    strcopy(szDisplayName, iLen, CrateInfo.DisplayName);
+    return true;
+}
+
+public bool GetCrateWorldModelByDefIndex(int iDefIndex, char[] szWorldModel, int iLen)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eCrateInfo CrateInfo;
+    g_smCratesInfo.GetArray(szDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+    strcopy(szWorldModel, iLen, CrateInfo.WorldModel);
+    return true;
+}
+
+public bool GetCrateWorldModelByCrateNum(int iCrateNum, char[] szWorldModel, int iLen)
+{
+    int iDefIndex = GetCrateDefIndexByCrateNum(iCrateNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eCrateInfo CrateInfo;
+    g_smCratesInfo.GetArray(szDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+    strcopy(szWorldModel, iLen, CrateInfo.WorldModel);
+    return true;
+}
+
+public int GetCrateItemsCountByDefIndex(int iDefIndex)
+{
+    int iIndex = g_arCratesNum.FindValue(iDefIndex);
+    if(iIndex == -1)
+    {
+        return -1;
+    }
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eCrateInfo CrateInfo;
+    g_smCratesInfo.GetArray(szDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+    return CrateInfo.ItemsCount;
+}
+
+public int GetCrateItemsCountByCrateNum(int iCrateNum)
+{
+    if(g_arCratesNum.Length < iCrateNum)
+    {
+        return -1;
+    }
+
+    int iDefIndex = GetCrateDefIndexByCrateNum(iCrateNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eCrateInfo CrateInfo;
+    g_smCratesInfo.GetArray(szDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+    return CrateInfo.ItemsCount;
+}
+
+public bool GetCrateItemByDefIndex(int iDefIndex, int iCrateItemNum, any[] iCrateItem, int iLength)
+{
+    int iIndex = g_arCratesNum.FindValue(iDefIndex);
+    if(iIndex == -1)
+    {
+        return false;
+    }
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eCrateInfo CrateInfo;
+    g_smCratesInfo.GetArray(szDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+    return view_as<bool>(CrateInfo.Items.GetArray(iCrateItemNum, iCrateItem, iLength));
+}
+
+public bool GetCrateItemByCrateNum(int iCrateNum, int iCrateItemNum, any[] iCrateItem, int iLength)
+{
+    if(g_arCratesNum.Length < iCrateNum)
+    {
+        return false;
+    }
+
+    int iDefIndex = GetCrateDefIndexByCrateNum(iCrateNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eCrateInfo CrateInfo;
+    g_smCratesInfo.GetArray(szDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+    return view_as<bool>(CrateInfo.Items.GetArray(iCrateItemNum, iCrateItem, iLength));
+}
+
+    /*      Sprays      */
+
+public int GetSpraySetIdBySpraySetNum(int iSpraySetNum)
+{
+    if(g_arSpraysSetsNum.Length < iSpraySetNum)
+    {
+        return -1;
+    }
+
+    return g_arSpraysSetsNum.Get(iSpraySetNum);
+}
+
+public int GetSpraySetNumBySpraySetId(int iSpraySetId)
+{
+    int iIndex = g_arSpraysSetsNum.FindValue(iSpraySetId);
+    if(iIndex == -1)
+    {
+        return -1;
+    }
+
+    return iIndex;
+}
+
+public bool GetSpraySetDisplayNameBySpraySetNum(int iSpraySetNum, char[] szDisplayName, int iLen)
+{
+    int iSpraySetId = GetSpraySetIdBySpraySetNum(iSpraySetNum);
+
+    char szSpraySetId[12];
+    IntToString(iSpraySetId, szSpraySetId, sizeof(szSpraySetId));
+
+    eSpraysSets SpraysSets;
+    g_smSpraysSets.GetArray(szSpraySetId, SpraysSets, sizeof(eSpraysSets));
+
+    strcopy(szDisplayName, iLen, SpraysSets.DisplayName);
+    return true;
+}
+
+public bool GetSpraySetDisplayNameBySpraySetId(int iSpraySetId, char[] szDisplayName, int iLen)
+{
+    char szSpraySetId[12];
+    IntToString(iSpraySetId, szSpraySetId, sizeof(szSpraySetId));
+
+    eSpraysSets SpraysSets;
+    g_smSpraysSets.GetArray(szSpraySetId, SpraysSets, sizeof(eSpraysSets));
+
+    strcopy(szDisplayName, iLen, SpraysSets.DisplayName);
+    return true;
+}
+
+public int GetSprayNumByDefIndex(int iDefIndex)
+{
+    int iIndex = g_arSpraysNum.FindValue(iDefIndex);
+    if(iIndex == -1)
+    {
+        return -1;
+    }
+
+    return iIndex;
+}
+
+public int GetSprayDefIndexBySprayNum(int iSprayNum)
+{
+    if(g_arSpraysNum.Length < iSprayNum)
+    {
+        return -1;
+    }
+
+    return g_arSpraysNum.Get(iSprayNum);
+}
+
+public bool GetSprayDisplayNameByDefIndex(int iDefIndex, char[] szDisplayName, int iLen)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eSprayInfo SprayInfo;
+    g_smSpraysInfo.GetArray(szDefIndex, SprayInfo, sizeof(eSprayInfo));
+
+    strcopy(szDisplayName, iLen, SprayInfo.DisplayName);
+    return true;
+}
+
+public bool GetSprayDisplayNameBySprayNum(int iSprayNum, char[] szDisplayName, int iLen)
+{
+    int iDefIndex = GetSprayDefIndexBySprayNum(iSprayNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eSprayInfo SprayInfo;
+    g_smSpraysInfo.GetArray(szDefIndex, SprayInfo, sizeof(eSprayInfo));
+
+    strcopy(szDisplayName, iLen, SprayInfo.DisplayName);
+    return true;
+}
+
+public bool GetSprayMaterialPathByDefIndex(int iDefIndex, char[] szMaterialPath, int iLen)
+{
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eSprayInfo SprayInfo;
+    g_smSpraysInfo.GetArray(szDefIndex, SprayInfo, sizeof(eSprayInfo));
+
+    strcopy(szMaterialPath, iLen, SprayInfo.MaterialPath);
+    return true;
+}
+
+public bool GetSprayMaterialPathBySprayNum(int iSprayNum, char[] szMaterialPath, int iLen)
+{
+    int iDefIndex = GetSprayDefIndexBySprayNum(iSprayNum);
+
+    char szDefIndex[12];
+    IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+    eSprayInfo SprayInfo;
+    g_smSpraysInfo.GetArray(szDefIndex, SprayInfo, sizeof(eSprayInfo));
+
+    strcopy(szMaterialPath, iLen, SprayInfo.MaterialPath);
+    return true;
+}
+
+public bool IsSprayInSet(int iSpraySetNum, int iSprayNum)
+{
+    if(iSpraySetNum < 0 || iSpraySetNum > g_iSpraysSetsCount)
+    {
+        return false;
+    }
+
+    if(iSprayNum < 0 || iSprayNum > g_iSpraysCount)
+    {
+        return false;
+    }
+
+    return g_bIsSprayInSet[iSpraySetNum][iSprayNum];
+}
+
+public bool GetSkinsDefIndexArrByWeaponNum(int iWeaponNum, any &arSkinsDefIndex){
+    //convert to def index
+    int iWeaponDefIndex = GetWeaponDefIndexByWeaponNum(iWeaponNum);
+
+    //call GetSkinsDefIndexArrByWeaponDefIndex
+    return GetSkinsDefIndexArrByWeaponDefIndex(iWeaponDefIndex, arSkinsDefIndex);
+}
+
+public bool GetSkinsDefIndexArrByWeaponDefIndex(int iWeaponDefIndex, any &arSkinsDefIndex){
+    //convert iWeaponDefIndex to string and use it as key on g_smWeaponPaints
+    char szWeaponDefIndex[12];
+    IntToString(iWeaponDefIndex, szWeaponDefIndex, sizeof(szWeaponDefIndex));
+
+    return g_smWeaponPaints.GetValue(szWeaponDefIndex, arSkinsDefIndex);  //it gets the array of skins def index
+}
+
+public bool GetSkinsDefIndexArrByWeaponClassName(char[] szClassName, any &arSkinsDefIndex){
+    //convert to def index
+    int iWeaponDefIndex = GetWeaponDefIndexByClassName(szClassName);
+
+    //call GetSkinsDefIndexArrByWeaponDefIndex
+    return GetSkinsDefIndexArrByWeaponDefIndex(iWeaponDefIndex, arSkinsDefIndex);
+}
+
+public bool GetSkinsDefIndexArrByGloveNum(int iGloveNum, any &arSkinsDefIndex){
+    //convert to def index
+    int iGloveDefIndex = GetGlovesDefIndexByGlovesNum(iGloveNum);
+
+    //call GetSkinsDefIndexArrByGloveDefIndex
+    return GetSkinsDefIndexArrByGloveDefIndex(iGloveDefIndex, arSkinsDefIndex);
+}
+
+public bool GetSkinsDefIndexArrByGloveDefIndex(int iGloveDefIndex, any &arSkinsDefIndex){
+    //convert iGloveDefIndex to string and use it as key on g_smGlovePaints
+    char szGloveDefIndex[12];
+    IntToString(iGloveDefIndex, szGloveDefIndex, sizeof(szGloveDefIndex));
+
+    return g_smGlovePaints.GetValue(szGloveDefIndex, arSkinsDefIndex);  //it gets the array of skins def index
 }

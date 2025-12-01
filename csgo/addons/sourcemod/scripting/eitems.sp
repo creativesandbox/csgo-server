@@ -7,9 +7,10 @@
 #pragma newdecls required
 #pragma semicolon 1
 
+
 #define TAG_NCLR "[eItems]"
-#define AUTHOR "ESK0 (Original author: SM9)"
-#define VERSION "0.10_noapi"
+#define AUTHOR "ESK0, modded by corrreia"
+#define VERSION "0.20.3"
 
 #include "files/globals.sp"
 #include "files/client.sp"
@@ -19,14 +20,21 @@
 #include "files/func.sp"
 #include "files/config.sp"
 
-
 public Plugin myinfo =
 {
     name = "eItems",
     author = AUTHOR,
-    version = VERSION,
+    version = VERSION
 };
 
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+{
+    RegPluginLibrary("eItems");
+
+    CreateNatives();
+    CreateForwards();
+    return APLRes_Success;
+}
 
 public void OnPluginStart()
 {
@@ -64,22 +72,31 @@ public void OnPluginStart()
     g_arStickersNum         = new ArrayList();
     g_smStickersSets        = new StringMap();
     g_smStickersInfo        = new StringMap();
+
+    // Agents
+    g_arAgentsNum           = new ArrayList();
+    g_smAgentsInfo          = new StringMap();
+
+    // Patches
+    g_arPatchesNum          = new ArrayList();
+    g_smPatchesInfo         = new StringMap();
+
+    // Crates
+    g_arCratesNum           = new ArrayList();
+    g_smCratesInfo          = new StringMap();
+
+    // Sprays
+    g_arSpraysSetsNum       = new ArrayList();
+    g_arSpraysNum           = new ArrayList();
+    g_smSpraysSets          = new StringMap();
+    g_smSpraysInfo          = new StringMap();
     
     g_cvHibernationWhenEmpty    = FindConVar("sv_hibernate_when_empty");
     g_iHibernateWhenEmpty       = g_cvHibernationWhenEmpty.IntValue;
 
     CheckHibernation();
 
-    char szLocalFileFolder[PLATFORM_MAX_PATH];
-    BuildPath(Path_SM, szLocalFileFolder, sizeof(szLocalFileFolder), "data/eItems");
-    BuildPath(Path_SM, g_szLocalFilePath, sizeof(g_szLocalFilePath), "data/eItems/eItems.json");
-
-    BuildPath(Path_SM, g_szConfigFilePath, sizeof(g_szConfigFilePath), "configs/eItems.cfg");
-
-    if(!DirExists(szLocalFileFolder))
-    {
-        CreateDirectory(szLocalFileFolder, 511);
-    }
+    BuildPath(Path_SM, g_szConfigFilePath, sizeof g_szConfigFilePath, "configs/eItems.json");
 
     LoadConfig();
     ParseItems();
@@ -128,33 +145,85 @@ public void OnPluginEnd()
     delete g_arStickersNum;
     delete g_smStickersSets;
     delete g_smStickersInfo;
+
+    delete g_arAgentsNum;
+    delete g_smAgentsInfo;
+
+    delete g_arPatchesNum;
+    delete g_smPatchesInfo;
+
+    for (int iCrateNum = 0; iCrateNum < g_iCratesCount; iCrateNum++)
+    {
+        int iDefIndex = GetCrateDefIndexByCrateNum(iCrateNum);
+        char szDefIndex[12];
+
+        IntToString(iDefIndex, szDefIndex, sizeof(szDefIndex));
+
+        eCrateInfo CrateInfo;
+        g_smCratesInfo.GetArray(szDefIndex, CrateInfo, sizeof(eCrateInfo));
+
+        delete CrateInfo.Items;
+    }
+    delete g_arCratesNum;
+    delete g_smCratesInfo;
+
+    delete g_arSpraysSetsNum;
+    delete g_arSpraysNum;
+    delete g_smSpraysSets;
+    delete g_smSpraysInfo;
 }
 
-public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+public void OnMapStart()
 {
-    RegPluginLibrary("eItems");
+    if (g_iSpraysCount < 1)
+    {
+        return;
+    }
 
-    CreateNatives();
-    CreateForwards();
-    return APLRes_Success;
+    AddSpraysToDownloadsTable();
 }
 
-public Action Event_OnRoundStart(Handle hEvent, char[] szName, bool bDontBroadcast)
+public void AddSpraysToDownloadsTable()
+{
+    if (!g_bDownloadSprays)
+    {
+        return;
+    }
+
+    for(int iSprayNum = 0; iSprayNum < g_iSpraysCount; iSprayNum++)
+    {
+        char szMaterialPath[PLATFORM_MAX_PATH];
+        char szMaterialDownloadPath[PLATFORM_MAX_PATH];
+        GetSprayMaterialPathBySprayNum(iSprayNum, szMaterialPath, sizeof(szMaterialPath));
+
+        Format(szMaterialDownloadPath, sizeof(szMaterialDownloadPath), "materials/%s.vmt", szMaterialPath);
+        if (FileExists(szMaterialDownloadPath))
+        {
+            AddFileToDownloadsTable(szMaterialDownloadPath);
+        }
+
+        Format(szMaterialDownloadPath, sizeof(szMaterialDownloadPath), "materials/%s.vtf", szMaterialPath);
+        if (FileExists(szMaterialDownloadPath))
+        {
+            AddFileToDownloadsTable(szMaterialDownloadPath);
+        }
+    }
+}
+
+public void Event_OnRoundStart(Handle hEvent, char[] szName, bool bDontBroadcast)
 {
     g_bIsRoundEnd = false;
 }
-public Action Event_OnRoundEnd(Handle hEvent, char[] szName, bool bDontBroadcast) 
+public void Event_OnRoundEnd(Handle hEvent, char[] szName, bool bDontBroadcast) 
 {
     g_bIsRoundEnd = true;
 }
 
-public Action Event_PlayerDeath(Handle hEvent, const char[] szName, bool bDontBroadcast)
+public void Event_PlayerDeath(Handle hEvent, const char[] szName, bool bDontBroadcast)
 {
 	int client = GetClientOfUserId(GetEventInt(hEvent, "userid"));
 	
 	ClientInfo[client].GivingWeapon = false;
-	
-	return Plugin_Continue;
 }
 
 public void OnClientPutInServer(int client)
@@ -184,11 +253,17 @@ public Action OnNormalSoundPlayed(int clients[64], int &iNumClients, char szSamp
 
 stock void CheckHibernation(bool bToDefault = false)
 {
-    if(g_iHibernateWhenEmpty == 0)
+    if (!g_bForceDisableHibernation)
     {
         return;
     }
-    if(bToDefault)
+
+    if (g_iHibernateWhenEmpty == 0)
+    {
+        return;
+    }
+    
+    if (bToDefault)
     {
         PrintToServer("%s Hibernation returned back to default", TAG_NCLR);
         g_cvHibernationWhenEmpty.SetInt(g_iHibernateWhenEmpty);

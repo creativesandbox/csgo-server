@@ -86,23 +86,13 @@ methodmap HTTPRequest < Handle
 	// @param url        URL to the REST API endpoint.
 	public native HTTPRequest(const char[] url);
 
-	// Appends a parameter to the form data.
-	//
-	// The parameter name and value are encoded according to RFC 3986.
-	//
-	// @param name       Parameter name.
-    // @param format     Formatting rules.
-    // @param ...        Variable number of format parameters.
-	public native void AppendFormParam(const char[] name, const char[] format, any ...);
-
 	// Appends a query parameter to the URL.
 	//
 	// The parameter name and value are encoded according to RFC 3986.
 	//
 	// @param name       Parameter name.
-    // @param format     Formatting rules.
-    // @param ...        Variable number of format parameters.
-	public native void AppendQueryParam(const char[] name, const char[] format, any ...);
+	// @param value      String value.
+	public native void AppendQueryParam(const char[] name, const char[] value);
 
 	// Sets the credentials for HTTP Basic authentication.
 	//
@@ -113,9 +103,8 @@ methodmap HTTPRequest < Handle
 	// Sets an HTTP header.
 	//
 	// @param name       Header name.
-    // @param format     Formatting rules.
-    // @param ...        Variable number of format parameters.
-	public native void SetHeader(const char[] name, const char[] format, any ...);
+	// @param value      String value.
+	public native void SetHeader(const char[] name, const char[] value);
 
 	// Performs an HTTP GET request.
 	//
@@ -178,14 +167,6 @@ methodmap HTTPRequest < Handle
 	// @param callback   A function to use as a callback when the upload has finished.
 	// @param value      Optional value to pass to the callback function.
 	public native void UploadFile(const char[] path, HTTPFileCallback callback, any value = 0);
-
-	// Performs an HTTP POST request with form data.
-	//
-	// This function closes the request Handle after completing.
-	//
-	// @param callback   A function to use as a callback when the request has finished.
-	// @param value      Optional value to pass to the callback function.
-	public native void PostForm(HTTPRequestCallback callback, any value = 0);
 
 	// Connect timeout in seconds. Defaults to 10.
 	property int ConnectTimeout {
